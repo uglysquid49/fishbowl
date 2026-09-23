@@ -15,6 +15,7 @@ public class PlayerController3D : MonoBehaviour
 
     private Camera mainCamera;
     private CharacterController characterController;
+    private Rigidbody rb;
 
     private InputAction moveInput;
     // private InputAction jumpInput;
