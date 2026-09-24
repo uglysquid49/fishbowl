@@ -35,9 +35,12 @@ public class ClickTheCircles : MonoBehaviour
 
     void MoveCircle()
     {
-        float x = Random.Range(-playArea.rect.width / 2, playArea.rect.width / 2);
+        float halfWidth = playArea.rect.width / 2f;
+        float halfHeight = playArea.rect.height / 2f;
+        float circleRadius = circle.rect.width / 2f;
 
-        float y = Random.Range(-playArea.rect.height / 2, playArea.rect.height / 2);
+        float x = Random.Range(-halfWidth + circleRadius, halfWidth - circleRadius);
+        float y = Random.Range(-halfHeight + circleRadius, halfHeight - circleRadius);
 
         circle.anchoredPosition = new Vector2(x, y);
     }
@@ -45,5 +48,6 @@ public class ClickTheCircles : MonoBehaviour
     void EndMinigame()
     {
         minigameCanvas.SetActive(false);
+        Debug.Log("wow you can click");
     }
 }
