@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class ClickTheCircles : MonoBehaviour
@@ -7,6 +8,7 @@ public class ClickTheCircles : MonoBehaviour
     public RectTransform playArea;
 
     public int clicksNeeded = 5;
+    public float spawnInterval = 1f;
 
     private int clicks = 0;
 
@@ -23,14 +25,23 @@ public class ClickTheCircles : MonoBehaviour
     {
         clicks++;
 
+        circle.gameObject.SetActive(false);
+
+
         if (clicks >= clicksNeeded)
         {
             EndMinigame();
         }
         else
         {
-            MoveCircle();
+            StartCoroutine(SpawnNextCircle());
         }
+    }
+    IEnumerator SpawnNextCircle()
+    {
+        yield return new WaitForSeconds(spawnInterval);
+        MoveCircle();
+        circle.gameObject.SetActive(true);
     }
 
     void MoveCircle()
