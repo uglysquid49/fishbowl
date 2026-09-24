@@ -35,15 +35,9 @@ public class ClickTheCircles : MonoBehaviour
 
     void MoveCircle()
     {
-        float x = Random.Range(
-            -playArea.rect.width / 2,
-            playArea.rect.width / 2
-        );
+        float x = Random.Range(-playArea.rect.width / 2, playArea.rect.width / 2);
 
-        float y = Random.Range(
-            -playArea.rect.height / 2,
-            playArea.rect.height / 2
-        );
+        float y = Random.Range(-playArea.rect.height / 2, playArea.rect.height / 2);
 
         circle.anchoredPosition = new Vector2(x, y);
     }
