@@ -1,85 +1,68 @@
 using System.Collections.Generic;
 using System.Globalization;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class QuestManager : MonoBehaviour
 {
-    // Loading all quests into a map - to make referencing one easy by its ID
+    public static QuestManager instance {  get; private set; }
 
     // Making a private dictionary that maps a string to a quest called QuestMap.
-    private Dictionary<string, Quest> questMap;
+    private Dictionary<string, Quest> questMap = new Dictionary<string, Quest>();
 
     private void Awake()
     {
-        questMap = CreateQuestMap();
-    }
-
-    private void OnEnable()
-    {
-        GameEventsManager.Instance.questEvents.onStartQuest += StartQuest;
-        GameEventsManager.Instance.questEvents.onAdvanceQuest += AdvanceQuest;
-        GameEventsManager.Instance.questEvents.onFinishQuest += FinishQuest;
-    }
-
-    private void OnDisable()
-    {
-        GameEventsManager.Instance.questEvents.onStartQuest -= StartQuest;
-        GameEventsManager.Instance.questEvents.onAdvanceQuest -= AdvanceQuest;
-        GameEventsManager.Instance.questEvents.onFinishQuest -= FinishQuest;
-    }
-
-    private void Start()
-    {
-        // broadcast the initial state of all quests on start up
-        foreach (Quest quest in questMap.Values)
+        if (instance != null)
         {
-            GameEventsManager.Instance.questEvents.QuestStateChange(quest);
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        DontDestroyOnLoad(gameObject); // crucial for persistent panagers across scenes
+
+        InitializeQuestMap();
+    }
+
+    private void InitializeQuestMap()
+    {
+        // Loading all QuestInfo assets from Resources folder
+        QuestInfo[] allQuests = Resources.LoadAll<QuestInfo>("Quests");
+        foreach (QuestInfo info in allQuests)
+        {
+            if (questMap.ContainsKey(info.id))
+            {
+                Debug.LogWarning($"Duplicate quest ID found: {info.id}");
+            }
+            questMap.Add(info.id, new Quest(info));
         }
     }
 
     private void StartQuest(string id)
     {
-        // TODO - start the quest
-        Debug.Log("Start Quest: " + id);
-    }
-
-    private void AdvanceQuest(string id)
-    {
-        // TODO - advance the quest
-        Debug.Log("Advance Quest " + id);
-    }
-
-    private void FinishQuest(string id)
-    {
-        // TODO - finish the quest
-        Debug.Log("Finish Quest " + id);
-    }
-
-    private Dictionary<string, Quest> CreateQuestMap()
-    {
-        // Loading all QuestInfo Scriptable Objects under the Assets/Resources/Quests Folder
-        QuestInfo[] allQuests = Resources.LoadAll<QuestInfo>("Quests");
-
-        // Creating the quest map
-        Dictionary<string, Quest> idToQuestMap = new Dictionary<string, Quest>();
-        foreach (QuestInfo questInfo in allQuests)
+        Quest quest = GetQuestById(id);
+        if (quest != null && quest.state == QuestState.CAN_START)
         {
-            if (idToQuestMap.ContainsKey(questInfo.id))
+            quest.ChangeState(QuestState.IN_PROGRESS);
+
+            // Trigger Scene Change if target scene is defined
+            if (!string.IsNullOrEmpty(quest.GetTargetScene()))
             {
-                Debug.LogWarning("Duplicate ID found when creating quest map: " + questInfo.id);
+                LoadQuestScene(quest.GetTargetScene());
             }
-            idToQuestMap.Add(questInfo.id, new Quest(questInfo));
+
+            GameEventsManager.Instance.questEvents.QuestStateChange(quest);
         }
-        return idToQuestMap;
+    }
+
+    private void LoadQuestScene(string sceneName)
+    {
+        Debug.Log($"Loading Scene for Quest: {sceneName}");
+        SceneManager.LoadScene(sceneName);
     }
 
     private Quest GetQuestById(string id)
     {
-        Quest quest = questMap[id];
-        if (quest == null)
-        {
-            Debug.LogError("ID not found in the Quest Map: " + id);
-        }
-        return quest;
+        if (questMap.TryGetValue(id, out Quest quest)) return quest;
+        return null;
     }
 }

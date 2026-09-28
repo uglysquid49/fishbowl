@@ -11,7 +11,7 @@ public abstract class QuestStep : MonoBehaviour
             isFinished = true;
 
             // Need to Do ; Advance the quest forward now that this step is finished
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }
