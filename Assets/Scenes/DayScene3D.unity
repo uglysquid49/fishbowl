@@ -1052,7 +1052,7 @@ GameObject:
   - component: {fileID: 260463279}
   - component: {fileID: 260463281}
   m_Layer: 0
-  m_Name: Square
+  m_Name: TV_SCREEN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1157,7 +1157,7 @@ VideoPlayer:
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
-  - 1
+  - 0.048
   m_Url: 
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
