@@ -24,6 +24,9 @@ public class PlayerController3D : MonoBehaviour
     private Vector3 moveDirection = Vector3.zero;
     private float lookAngle = 0f;
 
+    private Vector2 lookInput;
+    private float xRotation = 0f;
+
     private void Start()
     {
         mainCamera = GetComponentInChildren<Camera>();
@@ -75,5 +78,14 @@ public class PlayerController3D : MonoBehaviour
 
         mainCamera.transform.localRotation = Quaternion.Euler(lookAngle, 0, 0);
         transform.rotation *= Quaternion.Euler(0, mouseDelta.x * LookSensitivity, 0);
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            Debug.Log("Look action on controller triggered with controller");
+            lookInput = context.ReadValue<Vector2>();
+        }
     }
 }

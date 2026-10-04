@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameEventsManager : MonoBehaviour
 {
@@ -18,5 +19,15 @@ public class GameEventsManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         questEvents = new QuestEvents();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Trigger is activated!");
+            SceneManager.LoadScene("MiniGameScene", LoadSceneMode.Additive);
+            Camera.main.gameObject.SetActive(false); // Disabling the 3d camera
+        }
     }
 }
