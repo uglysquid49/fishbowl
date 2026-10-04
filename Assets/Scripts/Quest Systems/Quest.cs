@@ -4,6 +4,7 @@ public class Quest
 {
     public QuestInfo info { get; private set; }
     public QuestState state { get; private set; }
+    public int currentStepIndex { get; private set; }
 
     // tracking for current quest steeps will be added below;
 
@@ -18,7 +19,15 @@ public class Quest
         this.state = newState;
     }
 
-    public string GetTargetScene() => info.TargetSceneName;
+    public string GetPrefabTargetID()
+    {
+        return info.PrefabTargetID;
+    }
+
+    public void SetStepIndex(int index)
+    {
+        this.currentStepIndex = index;
+    }
 }
 
 public enum QuestState

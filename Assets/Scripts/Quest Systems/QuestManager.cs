@@ -1,13 +1,15 @@
+using UnityEngine;
 using System.Collections.Generic;
 using System.Globalization;
-using UnityEngine.SceneManagement;
-using UnityEngine;
+using UnityEngine.Rendering;
 
 public class QuestManager : MonoBehaviour
 {
-    public static QuestManager instance {  get; private set; }
+    [Header("Persistence Configuration")]
+    [SerializeField] private string saveFileName = "rpg_prefab_quest_save_data";
 
-    // Making a private dictionary that maps a string to a quest called QuestMap.
+    public static QuestManager instance { get; private set; }
+
     private Dictionary<string, Quest> questMap = new Dictionary<string, Quest>();
 
     private void Awake()
@@ -17,47 +19,61 @@ public class QuestManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         instance = this;
-        DontDestroyOnLoad(gameObject); // crucial for persistent panagers across scenes
+        DontDestroyOnLoad(gameObject);
 
         InitializeQuestMap();
+        LoadQuestSystemState();
     }
 
     private void InitializeQuestMap()
     {
-        // Loading all QuestInfo assets from Resources folder
         QuestInfo[] allQuests = Resources.LoadAll<QuestInfo>("Quests");
+
         foreach (QuestInfo info in allQuests)
         {
-            if (questMap.ContainsKey(info.id))
-            {
-                Debug.LogWarning($"Duplicate quest ID found: {info.id}");
-            }
+            if (questMap.ContainsKey(info.id)) continue;
             questMap.Add(info.id, new Quest(info));
         }
     }
 
-    private void StartQuest(string id)
+    public void StartQuest(string id)
     {
         Quest quest = GetQuestById(id);
         if (quest != null && quest.state == QuestState.CAN_START)
         {
             quest.ChangeState(QuestState.IN_PROGRESS);
 
-            // Trigger Scene Change if target scene is defined
-            if (!string.IsNullOrEmpty(quest.GetTargetScene()))
+            if (!string.IsNullOrEmpty(quest.GetPrefabTargetID()) && SceneMiniGameRegistry.instance != null)
             {
-                LoadQuestScene(quest.GetTargetScene());
+                SceneMiniGameRegistry.instance.ToggleMiniGameHierarchy(quest.GetPrefabTargetID(), true);
             }
 
-            GameEventsManager.Instance.questEvents.QuestStateChange(quest);
+            if (GameEventsManager.instance != null)
+            {
+                GameEventsManager.instance.questEvents.QuestStateChanged(quest);
+            }
+
+            SaveQuestSystemState();
         }
     }
 
-    private void LoadQuestScene(string sceneName)
+    public void CompleteAndCloseQuest(string id)
     {
-        Debug.Log($"Loading Scene for Quest: {sceneName}");
-        SceneManager.LoadScene(sceneName);
+        Quest quest = GetQuestById(id);
+        if (quest != null && quest.state == QuestState.IN_PROGRESS)
+        {
+            quest.ChangeState(QuestState.FINISHED);
+
+            if (!string.IsNullOrEmpty(quest.GetPrefabTargetID()) && SceneMiniGameRegistry.instance != null)
+            {
+                SceneMiniGameRegistry.instance.ToggleMiniGameHierarchy(quest.GetPrefabTargetID(), false);
+            }
+
+            SaveQuestSystemState();
+            Debug.Log($"Quest {id} marked finished. Mini-game hidden successfully.");
+        }
     }
 
     private Quest GetQuestById(string id)
@@ -65,4 +81,71 @@ public class QuestManager : MonoBehaviour
         if (questMap.TryGetValue(id, out Quest quest)) return quest;
         return null;
     }
+
+    public void SaveQuestSystemState()
+    {
+        GameSaveDataWrapper wrapper = new GameSaveDataWrapper();
+
+        foreach (KeyValuePair<string, Quest> pair in questMap)
+        {
+            QuestDataSave savedData = new QuestDataSave
+            {
+                questId = pair.Key,
+                state = pair.Value.state,
+                currentQuestStepIndex = pair.Value.currentStepIndex
+            };
+            wrapper.savedQuests.Add(savedData);
+        }
+
+        string jsonOutput = JsonUtility.ToJson(wrapper, true);
+        PlayerPrefs.SetString(saveFileName, jsonOutput);
+        PlayerPrefs.Save();
+    }
+
+    public void LoadQuestSystemState()
+    {
+        if (!PlayerPrefs.HasKey(saveFileName)) return;
+
+        string rawJson = PlayerPrefs.GetString(saveFileName);
+        GameSaveDataWrapper wrapper = JsonUtility.FromJson<GameSaveDataWrapper>(rawJson);
+
+        foreach (QuestDataSave savedQuestData in wrapper.savedQuests)
+        {
+            Quest liveQuest = GetQuestById(savedQuestData.questId);
+            if (liveQuest != null)
+            {
+                liveQuest.ChangeState(savedQuestData.state);
+                liveQuest.SetStepIndex(savedQuestData.currentQuestStepIndex);
+
+                if (liveQuest.state == QuestState.IN_PROGRESS && !string.IsNullOrEmpty(liveQuest.GetPrefabTargetID()))
+                {
+                    StartCoroutine(ExecuteDelayedPrefabRecovery(liveQuest.GetPrefabTargetID()));
+                }
+            }
+        }
+    }
+
+    private System.Collections.IEnumerator ExecuteDelayedPrefabRecovery(string prefabID)
+    {
+        yield return new WaitForEndOfFrame();
+        if (SceneMiniGameRegistry.instance != null)
+        {
+            SceneMiniGameRegistry.instance.ToggleMiniGameHierarchy(prefabID, true);
+        }
+    }
 }
+
+[System.Serializable]
+public struct QuestDataSave
+{
+    public string questId;
+    public QuestState state;
+    public int currentQuestStepIndex;
+}
+
+[System.Serializable]
+public class GameSaveDataWrapper
+{
+    public List<QuestDataSave> savedQuests = new List<QuestDataSave>();
+}
+

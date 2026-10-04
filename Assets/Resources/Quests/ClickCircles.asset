@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e1a8208c8917494a80d5255fc10b508, type: 3}
+  m_Script: {fileID: 11500000, guid: db6322ed15b68b343b82785f52aa5327, type: 3}
   m_Name: ClickCircles
-  m_EditorClassIdentifier: Assembly-CSharp::GlobalQuestEvent
+  m_EditorClassIdentifier: Assembly-CSharp::QuestInfo
+  <id>k__BackingField: 89329e4b-dfaa-44b1-8aad-5261c9ea7d28
+  <questName>k__BackingField: ClickCircles
+  prefabTargetID: ClickCircles

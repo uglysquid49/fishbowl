@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6322ed15b68b343b82785f52aa5327, type: 3}
   m_Name: WatchingTV
   m_EditorClassIdentifier: Assembly-CSharp::QuestInfo
-  <id>k__BackingField: WatchingTV
-  displayName: WatchingTV
-  questPrerequisites: []
-  questStepPrefabs: []
+  <id>k__BackingField: a027448b-327b-428d-b11a-56eb9071fe7b
+  <questName>k__BackingField: WatchingTV
+  prefabTargetID: 
