@@ -12,6 +12,8 @@ public class Quest
     {
         this.info = questInfo;
         this.state = QuestState.CAN_START;
+
+        Debug.Log(questInfo.questName);
     }
 
     public void ChangeState(QuestState newState)

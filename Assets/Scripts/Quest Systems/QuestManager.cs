@@ -24,7 +24,8 @@ public class QuestManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         InitializeQuestMap();
-        LoadQuestSystemState();
+
+        //LoadQuestSystemState(); // This line ended up causing an error that would have our quests start in progress rather than can start
     }
 
     private void InitializeQuestMap()
@@ -41,6 +42,7 @@ public class QuestManager : MonoBehaviour
     public void StartQuest(string id)
     {
         Quest quest = GetQuestById(id);
+
         if (quest != null && quest.state == QuestState.CAN_START)
         {
             quest.ChangeState(QuestState.IN_PROGRESS);
@@ -48,6 +50,8 @@ public class QuestManager : MonoBehaviour
             if (!string.IsNullOrEmpty(quest.GetPrefabTargetID()) && SceneMiniGameRegistry.instance != null)
             {
                 SceneMiniGameRegistry.instance.ToggleMiniGameHierarchy(quest.GetPrefabTargetID(), true);
+
+                Debug.Log("Quest is starting");
             }
 
             if (GameEventsManager.instance != null)
@@ -55,7 +59,7 @@ public class QuestManager : MonoBehaviour
                 GameEventsManager.instance.questEvents.QuestStateChanged(quest);
             }
 
-            SaveQuestSystemState();
+            // SaveQuestSystemState();
         }
     }
 
@@ -71,7 +75,7 @@ public class QuestManager : MonoBehaviour
                 SceneMiniGameRegistry.instance.ToggleMiniGameHierarchy(quest.GetPrefabTargetID(), false);
             }
 
-            SaveQuestSystemState();
+            // SaveQuestSystemState();
             Debug.Log($"Quest {id} marked finished. Mini-game hidden successfully.");
         }
     }
@@ -80,26 +84,6 @@ public class QuestManager : MonoBehaviour
     {
         if (questMap.TryGetValue(id, out Quest quest)) return quest;
         return null;
-    }
-
-    public void SaveQuestSystemState()
-    {
-        GameSaveDataWrapper wrapper = new GameSaveDataWrapper();
-
-        foreach (KeyValuePair<string, Quest> pair in questMap)
-        {
-            QuestDataSave savedData = new QuestDataSave
-            {
-                questId = pair.Key,
-                state = pair.Value.state,
-                currentQuestStepIndex = pair.Value.currentStepIndex
-            };
-            wrapper.savedQuests.Add(savedData);
-        }
-
-        string jsonOutput = JsonUtility.ToJson(wrapper, true);
-        PlayerPrefs.SetString(saveFileName, jsonOutput);
-        PlayerPrefs.Save();
     }
 
     public void LoadQuestSystemState()
