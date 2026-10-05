@@ -11,7 +11,7 @@ public class GameEvents : ScriptableObject
     public delegate void UpdateAnswerUICallback(Answer pickedanswer);
     public UpdateAnswerUICallback UpdateAnswerUI;
 
-    public delegate void DisplayResolutionScreenCallback(UIManager.ResolutionScreenType type);
+    public delegate void DisplayResolutionScreenCallback(UIManager.ResolutionScreenType type, int score);
     public DisplayResolutionScreenCallback DisplayResolutionScreenUI;
 
     public delegate void ScoreUpdatedCallback();
