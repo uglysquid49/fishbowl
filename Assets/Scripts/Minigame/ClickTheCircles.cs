@@ -61,4 +61,10 @@ public class ClickTheCircles : MonoBehaviour
         minigameCanvas.SetActive(false);
         Debug.Log("wow you can click");
     }
+
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 }
