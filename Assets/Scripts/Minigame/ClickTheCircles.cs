@@ -23,6 +23,8 @@ public class ClickTheCircles : MonoBehaviour
 
     public void ClickCircle()
     {
+
+        Debug.Log("CLICKED!");
         clicks++;
 
         circle.gameObject.SetActive(false);
