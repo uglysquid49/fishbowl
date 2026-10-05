@@ -12,7 +12,7 @@ public class QuizGameManager : MonoBehaviour
 
     [SerializeField] GameEvents events = null;
 
-    private List<AnswerData> PickedAnswers = new List<AnswerData>();
+    private List<AnswersData> PickedAnswers = new List<AnswersData>();
     private List<int> FinishedQuestions = new List<int>();
     private int currentQuestion = 0;
 
@@ -30,7 +30,7 @@ public class QuizGameManager : MonoBehaviour
 
     public void EraseAnswers()
     {
-        PickedAnswers = new List<AnswerData>();
+        PickedAnswers = new List<AnswersData>();
     }
 
     void Display()
