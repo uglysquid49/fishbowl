@@ -29,7 +29,7 @@ public class QuizGameManager : MonoBehaviour
             Debug.Log(question.Info);
         }
 
-        //Display();
+        Display();
     }
 
     public void EraseAnswers()

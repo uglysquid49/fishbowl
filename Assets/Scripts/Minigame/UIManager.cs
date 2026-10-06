@@ -23,6 +23,9 @@ public struct UIElements
     [SerializeField] TextMeshProUGUI questionInfoTextObject;
     public TextMeshProUGUI QuestionInfoTextObject { get { return questionInfoTextObject; } }
 
+    [SerializeField] Image questionImage;
+    public Image QuestionImage { get { return questionImage; } }
+
     [SerializeField] TextMeshProUGUI scoreText;
     public TextMeshProUGUI ScoreText { get { return scoreText; } }
 
@@ -74,6 +77,7 @@ public class UIManager : MonoBehaviour
     void UpdateQuestionUI(Question question)
     {
         uiElements.QuestionInfoTextObject.text = question.Info;
+        uiElements.QuestionImage.sprite = question.QuestionImage;
         CreateAnswers(question);
     }
 

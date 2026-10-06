@@ -13,7 +13,7 @@ public struct Answer
     public bool isCorrect { get { return _isCorrect; } }
 
 }
-[CreateAssetMenu(fileName = "New Question", menuName = "Quiz/new Question")]
+[CreateAssetMenu(fileName = "Question", menuName = "Quiz/new Question")]
 public class Question : ScriptableObject
 {
     public enum AnswerType { Multi, Single }
@@ -21,6 +21,9 @@ public class Question : ScriptableObject
 
     [SerializeField] private string _info = string.Empty;
     public string Info { get { return _info; } }
+
+    [SerializeField] private Sprite _questionImage;
+    public Sprite QuestionImage { get { return _questionImage; } }
 
     [SerializeField] Answer[] _answers = null;
     public Answer[] Answers { get { return _answers; } }
