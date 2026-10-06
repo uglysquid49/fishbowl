@@ -2230,6 +2230,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   events: {fileID: 11400000, guid: 04685268af4be2e4fb2d34036ef6691f, type: 2}
   answerPrefab: {fileID: 1102986094}
+  uiElements:
+    answersContentArea: {fileID: 337619599}
+    questionInfoTextObject: {fileID: 1975917850}
+    scoreText: {fileID: 469946928}
+    resolutionBG: {fileID: 384741292}
+    resolutionStateInfoText: {fileID: 1175797670}
+    resolutionScoreText: {fileID: 178940275}
+    highscoreText: {fileID: 1446036334}
+    mainCanvasGroup: {fileID: 813933697}
+    finishUIElements: {fileID: 1262688414}
   mParameters:
     margins: 0
 --- !u!114 &1691029723
@@ -2872,7 +2882,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975917848}
-  m_CullTransparentMesh: 0
+  m_CullTransparentMesh: 1
 --- !u!1 &1982093047
 GameObject:
   m_ObjectHideFlags: 0

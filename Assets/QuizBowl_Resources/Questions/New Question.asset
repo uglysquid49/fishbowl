@@ -12,15 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: New Question
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  _info: What should you do soon as you wake up?
-  _answers:
-  - _info: Go to the bathroom
-    _isCorrect: 0
-  - _info: Yawn
-    _isCorrect: 0
-  - _info: Make the bed
-    _isCorrect: 1
-  _useTimer: 1
-  _timer: 60
+  _info: asdwafaewf
+  _answers: []
+  _useTimer: 0
+  _timer: 0
   _answerType: 0
   _addScore: 10

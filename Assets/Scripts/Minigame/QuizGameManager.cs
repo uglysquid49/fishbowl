@@ -18,7 +18,11 @@ public class QuizGameManager : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("QuizGameManager Start() is running!");
+
         LoadQuestions();
+
+        Debug.Log("Number of questions loaded: " + Questions.Length);
 
         foreach (var question in Questions)
         {
