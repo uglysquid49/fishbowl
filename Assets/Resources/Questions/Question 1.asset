@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d4c3512d7cbb947bedf41abd2c1da4, type: 3}
   m_Name: Question 1
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  _info: 
+  _info: What fish am I?
   _questionImage: {fileID: 0}
-  _answers: []
+  _answers:
+  - _info: Catfish
+    _isCorrect: 0
+  - _info: Shark
+    _isCorrect: 0
+  - _info: Whale
+    _isCorrect: 0
+  - _info: Goldfish
+    _isCorrect: 1
   _useTimer: 0
   _timer: 0
-  _answerType: 0
+  _answerType: 1
   _addScore: 10

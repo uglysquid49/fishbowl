@@ -12,10 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d4c3512d7cbb947bedf41abd2c1da4, type: 3}
   m_Name: Question 2
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  _info: 
+  _info: What color is your bed?
   _questionImage: {fileID: 0}
-  _answers: []
+  _answers:
+  - _info: Orange
+    _isCorrect: 1
+  - _info: Green
+    _isCorrect: 0
+  - _info: Red
+    _isCorrect: 0
+  - _info: Purple
+    _isCorrect: 0
   _useTimer: 0
   _timer: 0
-  _answerType: 0
+  _answerType: 1
   _addScore: 10

@@ -15,6 +15,14 @@ public class QuizGameManager : MonoBehaviour
     private List<int> FinishedQuestions = new List<int>();
 
     private int currentQuestion = 0;
+
+    private bool IsFinished
+    {
+        get
+        {
+            return FinishedQuestions.Count >= Questions.Length;
+        }
+    }
     #endregion
 
     #region Unity Methods
@@ -22,12 +30,21 @@ public class QuizGameManager : MonoBehaviour
     {
         events.UpdateAnswerUI += UpdateAnswers;
     }
+
     void OnDisable()
     {
         events.UpdateAnswerUI -= UpdateAnswers;
     }
+
+    void Awake()
+    {
+        events.CurrentFinalScore = 0;
+    }
+
     void Start()
     {
+        events.StartupHighscore = PlayerPrefs.GetInt(GameUtility.SavePrefKey);
+
         LoadQuestions();
 
         var seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
@@ -74,7 +91,6 @@ public class QuizGameManager : MonoBehaviour
             }
         }
     }
-
     public void EraseAnswers()
     {
         PickedAnswers = new List<AnswersData>();
@@ -94,13 +110,9 @@ public class QuizGameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning(
-                "Something went wrong while trying to display new Question UI Data. " +
-                "GameEvents.UpdateQuestionUI is null."
-            );
+            Debug.LogWarning("Something went wrong while trying to display new Question UI Data. GameEvents.UpdateQuestionUI is null.");
         }
     }
-
     Question GetRandomQuestion()
     {
         var randomIndex = GetRandomQuestionIndex();
@@ -109,7 +121,6 @@ public class QuizGameManager : MonoBehaviour
 
         return Questions[currentQuestion];
     }
-
     int GetRandomQuestionIndex()
     {
         var random = 0;
@@ -119,16 +130,12 @@ public class QuizGameManager : MonoBehaviour
             do
             {
                 random = UnityEngine.Random.Range(0, Questions.Length);
-
-            } while (
-                FinishedQuestions.Contains(random) ||
-                random == currentQuestion
-            );
+            }
+            while (FinishedQuestions.Contains(random) || random == currentQuestion);
         }
 
         return random;
     }
-
     void LoadQuestions()
     {
         Object[] objs = Resources.LoadAll("Questions", typeof(Question));
@@ -149,79 +156,78 @@ public class QuizGameManager : MonoBehaviour
 
         FinishedQuestions.Add(currentQuestion);
 
-        Debug.Log("Answer submitted!");
-        Debug.Log("Correct: " + isCorrect);
+        UpdateScore(isCorrect ? Questions[currentQuestion].AddScore : -Questions[currentQuestion].AddScore);
+
+        if (IsFinished)
+        {
+            SetHighscore();
+        }
+
+        UIManager.ResolutionScreenType type = IsFinished
+            ? UIManager.ResolutionScreenType.Finish
+            : isCorrect
+                ? UIManager.ResolutionScreenType.Correct
+                : UIManager.ResolutionScreenType.Incorrect;
 
         if (events.DisplayResolutionScreenUI != null)
         {
-            if (FinishedQuestions.Count >= Questions.Length)
-            {
-                events.DisplayResolutionScreenUI(
-                    UIManager.ResolutionScreenType.Finish,
-                    Questions[currentQuestion].AddScore
-                );
-            }
-            else if (isCorrect)
-            {
-                events.DisplayResolutionScreenUI(
-                    UIManager.ResolutionScreenType.Correct,
-                    Questions[currentQuestion].AddScore
-                );
-            }
-            else
-            {
-                events.DisplayResolutionScreenUI(
-                    UIManager.ResolutionScreenType.Incorrect,
-                    Questions[currentQuestion].AddScore
-                );
-            }
+            events.DisplayResolutionScreenUI(type, Questions[currentQuestion].AddScore);
         }
 
-        if (FinishedQuestions.Count < Questions.Length)
+        if (!IsFinished)
         {
             StartCoroutine(WaitTillNextRound());
         }
     }
-
     bool CheckAnswers()
     {
         if (!CompareAnswers())
         {
             return false;
         }
-
         return true;
     }
-
     bool CompareAnswers()
     {
         if (PickedAnswers.Count > 0)
         {
-            List<int> correctAnswers =
-                Questions[currentQuestion].GetCorrectAnswers();
+            List<int> correctAnswers = Questions[currentQuestion].GetCorrectAnswers();
+            List<int> pickedAnswers = PickedAnswers.Select(x => x.AnswerIndex).ToList();
 
-            List<int> pickedAnswers =
-                PickedAnswers
-                .Select(x => x.AnswerIndex)
-                .ToList();
-
-            var missingAnswers =
-                correctAnswers.Except(pickedAnswers).ToList();
-
-            var wrongAnswers =
-                pickedAnswers.Except(correctAnswers).ToList();
+            var missingAnswers = correctAnswers.Except(pickedAnswers).ToList();
+            var wrongAnswers = pickedAnswers.Except(correctAnswers).ToList();
 
             return !missingAnswers.Any() && !wrongAnswers.Any();
         }
-
         return false;
+    }
+    #endregion
+
+    #region Score Methods
+    void UpdateScore(int add)
+    {
+        events.CurrentFinalScore += add;
+
+        if (events.ScoreUpdatedUI != null)
+        {
+            events.ScoreUpdatedUI();
+        }
+    }
+    void SetHighscore()
+    {
+        var highscore = PlayerPrefs.GetInt(GameUtility.SavePrefKey);
+
+        if (highscore < events.CurrentFinalScore)
+        {
+            PlayerPrefs.SetInt(GameUtility.SavePrefKey, events.CurrentFinalScore);
+        }
     }
     #endregion
 
     #region Next Question
     IEnumerator WaitTillNextRound()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(GameUtility.ResolutionDelayTime);
 
         Display();
     }

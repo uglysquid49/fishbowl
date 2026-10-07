@@ -1,22 +1,26 @@
-using TMPro;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 
 public class AnswersData : MonoBehaviour
 {
-    #region Variables
     [Header("UI Elements")]
-    [SerializeField] TextMeshProUGUI infoTextObject = null;
-    [SerializeField] Image toggle = null;
+    [SerializeField] TextMeshProUGUI infoTextObject;
+    [SerializeField] Image toggle;
 
     [Header("Textures")]
-    [SerializeField] Sprite uncheckedToggle = null;
-    [SerializeField] Sprite checkedToggle = null;
+    [SerializeField] Sprite uncheckedToggle;
+    [SerializeField] Sprite checkedToggle;
 
     [Header("References")]
-    [SerializeField] GameEvents events = null;
+    [SerializeField] GameEvents events;
 
-    private RectTransform _rect = null;
+    [Header("Answer Colors")]
+    [SerializeField] Color normalColor = Color.white;
+    [SerializeField] Color correctColor = Color.green;
+    [SerializeField] Color incorrectColor = Color.red;
+
+    private RectTransform _rect;
 
     public RectTransform Rect
     {
@@ -26,34 +30,34 @@ public class AnswersData : MonoBehaviour
             {
                 _rect = GetComponent<RectTransform>() ?? gameObject.AddComponent<RectTransform>();
             }
+
             return _rect;
         }
     }
 
     private int _answerIndex = -1;
-    public int AnswerIndex { get { return _answerIndex; } }
-    private bool Checked = false;
-    #endregion
 
-    /// <summary>
-    /// Function that is called to update the answer data.
-    /// </summary>
+    public int AnswerIndex
+    {
+        get { return _answerIndex; }
+    }
+
+    private bool Checked = false;
+
     public void UpdateData(string info, int index)
     {
         infoTextObject.text = info;
         _answerIndex = index;
+        Reset();
     }
-    /// <summary>
-    /// Function that is called to reset values back to default.
-    /// </summary>
+
     public void Reset()
     {
         Checked = false;
+        toggle.color = normalColor;
         UpdateUI();
     }
-    /// <summary>
-    /// Function that is called to switch the state.
-    /// </summary>
+
     public void SwitchState()
     {
         Checked = !Checked;
@@ -64,13 +68,19 @@ public class AnswersData : MonoBehaviour
             events.UpdateAnswerUI(this);
         }
     }
-    /// <summary>
-    /// Function that is called to update UI.
-    /// </summary>
+
+    public void SetCorrect()
+    {
+        toggle.color = correctColor;
+    }
+
+    public void SetIncorrect()
+    {
+        toggle.color = incorrectColor;
+    }
+
     void UpdateUI()
     {
-        if (toggle == null) return;
-
-        toggle.sprite = (Checked) ? checkedToggle : uncheckedToggle;
+        toggle.sprite = Checked ? checkedToggle : uncheckedToggle;
     }
 }

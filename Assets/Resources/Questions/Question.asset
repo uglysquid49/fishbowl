@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d4c3512d7cbb947bedf41abd2c1da4, type: 3}
   m_Name: Question
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  _info: what shape is this?
-  _questionImage: {fileID: 0}
+  _info: What shape is this?
+  _questionImage: {fileID: 7482667652216324306, guid: 5531bb119bc70f440ba0e6e8004814ab, type: 3}
   _answers:
+  - _info: Circle
+    _isCorrect: 0
   - _info: Triangle
     _isCorrect: 1
-  _useTimer: 0
-  _timer: 0
-  _answerType: 0
+  - _info: Square
+    _isCorrect: 0
+  - _info: Dodecahedron
+    _isCorrect: 0
+  _useTimer: 1
+  _timer: 120
+  _answerType: 1
   _addScore: 10
