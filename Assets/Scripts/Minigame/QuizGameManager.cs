@@ -30,17 +30,14 @@ public class QuizGameManager : MonoBehaviour
     {
         events.UpdateAnswerUI += UpdateAnswers;
     }
-
     void OnDisable()
     {
         events.UpdateAnswerUI -= UpdateAnswers;
     }
-
     void Awake()
     {
         events.CurrentFinalScore = 0;
     }
-
     void Start()
     {
         events.StartupHighscore = PlayerPrefs.GetInt(GameUtility.SavePrefKey);
@@ -50,13 +47,10 @@ public class QuizGameManager : MonoBehaviour
         var seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
         UnityEngine.Random.InitState(seed);
 
-        Debug.Log("Number of questions loaded: " + Questions.Length);
-
         foreach (var question in Questions)
         {
             Debug.Log(question.Info);
         }
-
         Display();
     }
     #endregion
@@ -73,7 +67,6 @@ public class QuizGameManager : MonoBehaviour
                     answer.Reset();
                 }
             }
-
             PickedAnswers.Clear();
             PickedAnswers.Add(newAnswer);
         }
@@ -88,6 +81,30 @@ public class QuizGameManager : MonoBehaviour
             else
             {
                 PickedAnswers.Add(newAnswer);
+            }
+        }
+    }
+    void ShowAnswerResult()
+    {
+        List<int> correctAnswers = Questions[currentQuestion].GetCorrectAnswers();
+
+        foreach (var answer in PickedAnswers)
+        {
+            if (correctAnswers.Contains(answer.AnswerIndex))
+            {
+                answer.SetCorrect();
+            }
+            else
+            {
+                answer.SetIncorrect();
+            }
+        }
+
+        foreach (var answer in FindObjectsByType<AnswersData>(FindObjectsSortMode.None))
+        {
+            if (correctAnswers.Contains(answer.AnswerIndex))
+            {
+                answer.SetCorrect();
             }
         }
     }
@@ -154,6 +171,8 @@ public class QuizGameManager : MonoBehaviour
     {
         bool isCorrect = CheckAnswers();
 
+        ShowAnswerResult();
+
         FinishedQuestions.Add(currentQuestion);
 
         UpdateScore(isCorrect ? Questions[currentQuestion].AddScore : -Questions[currentQuestion].AddScore);
@@ -161,23 +180,10 @@ public class QuizGameManager : MonoBehaviour
         if (IsFinished)
         {
             SetHighscore();
+            return;
         }
 
-        UIManager.ResolutionScreenType type = IsFinished
-            ? UIManager.ResolutionScreenType.Finish
-            : isCorrect
-                ? UIManager.ResolutionScreenType.Correct
-                : UIManager.ResolutionScreenType.Incorrect;
-
-        if (events.DisplayResolutionScreenUI != null)
-        {
-            events.DisplayResolutionScreenUI(type, Questions[currentQuestion].AddScore);
-        }
-
-        if (!IsFinished)
-        {
-            StartCoroutine(WaitTillNextRound());
-        }
+        StartCoroutine(WaitTillNextRound());
     }
     bool CheckAnswers()
     {

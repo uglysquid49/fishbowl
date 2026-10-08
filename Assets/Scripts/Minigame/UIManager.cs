@@ -40,28 +40,9 @@ public struct UIElements
 
     [Space]
 
-    [SerializeField] Animator resolutionScreenAnimator;
-    public Animator ResolutionScreenAnimator { get { return resolutionScreenAnimator; } }
-
-    [SerializeField] Image resolutionBG;
-    public Image ResolutionBG { get { return resolutionBG; } }
-
-    [SerializeField] TextMeshProUGUI resolutionStateInfoText;
-    public TextMeshProUGUI ResolutionStateInfoText { get { return resolutionStateInfoText; } }
-
-    [SerializeField] TextMeshProUGUI resolutionScoreText;
-    public TextMeshProUGUI ResolutionScoreText { get { return resolutionScoreText; } }
-
-    [Space]
-
-    [SerializeField] TextMeshProUGUI highscoreText;
-    public TextMeshProUGUI HighScoreText { get { return highscoreText; } }
-
     [SerializeField] CanvasGroup mainCanvasGroup;
     public CanvasGroup MainCanvasGroup { get { return mainCanvasGroup; } }
 
-    [SerializeField] RectTransform finishUIElements;
-    public RectTransform FinishUIElements { get { return finishUIElements; } }
 }
 
 public class UIManager : MonoBehaviour
@@ -90,32 +71,26 @@ public class UIManager : MonoBehaviour
         events.DisplayResolutionScreenUI += DisplayResolution;
         events.ScoreUpdatedUI += UpdateScoreUI;
     }
-
     void OnDisable()
     {
         events.UpdateQuestionUI -= UpdateQuestionUI;
         events.DisplayResolutionScreenUI -= DisplayResolution;
         events.ScoreUpdatedUI -= UpdateScoreUI;
     }
-
     void Start()
     {
         UpdateScoreUI();
         resStateParaHash = Animator.StringToHash("ScreenState");
     }
-
     void UpdateQuestionUI(Question question)
     {
         uiElements.QuestionInfoTextObject.text = question.Info;
         uiElements.QuestionImage.sprite = question.QuestionImage;
         CreateAnswers(question);
     }
-
     void DisplayResolution(ResolutionScreenType type, int score)
     {
-        UpdateResUI(type, score);
 
-        uiElements.ResolutionScreenAnimator.SetInteger(resStateParaHash, 2);
         uiElements.MainCanvasGroup.blocksRaycasts = false;
 
         if (type != ResolutionScreenType.Finish)
@@ -129,44 +104,12 @@ public class UIManager : MonoBehaviour
             StartCoroutine(IE_DisplayTimedResolution);
         }
     }
-
     IEnumerator DisplayTimedResolution()
     {
         yield return new WaitForSeconds(GameUtility.ResolutionDelayTime);
 
-        uiElements.ResolutionScreenAnimator.SetInteger(resStateParaHash, 1);
         uiElements.MainCanvasGroup.blocksRaycasts = true;
     }
-
-    void UpdateResUI(ResolutionScreenType type, int score)
-    {
-        var highscore = PlayerPrefs.GetInt(GameUtility.SavePrefKey);
-
-        switch (type)
-        {
-            case ResolutionScreenType.Correct:
-                uiElements.ResolutionBG.color = mParameters.CorrectBGColor;
-                uiElements.ResolutionStateInfoText.text = "CORRECT!";
-                uiElements.ResolutionScoreText.text = "+" + score;
-                break;
-
-            case ResolutionScreenType.Incorrect:
-                uiElements.ResolutionBG.color = mParameters.IncorrectBGColor;
-                uiElements.ResolutionStateInfoText.text = "WRONG!";
-                uiElements.ResolutionScoreText.text = "-" + score;
-                break;
-
-            case ResolutionScreenType.Finish:
-                uiElements.ResolutionBG.color = mParameters.FinalBGColor;
-                uiElements.ResolutionStateInfoText.text = "FINAL SCORE";
-                StartCoroutine(CalculateScore());
-                uiElements.FinishUIElements.gameObject.SetActive(true);
-                uiElements.HighScoreText.gameObject.SetActive(true);
-                uiElements.HighScoreText.text = "Highscore: " + highscore;
-                break;
-        }
-    }
-
     IEnumerator CalculateScore()
     {
         var scoreValue = 0;
@@ -174,12 +117,10 @@ public class UIManager : MonoBehaviour
         while (scoreValue < events.CurrentFinalScore)
         {
             scoreValue++;
-            uiElements.ResolutionScoreText.text = scoreValue.ToString();
 
             yield return null;
         }
     }
-
     void CreateAnswers(Question question)
     {
         EraseAnswers();
@@ -199,7 +140,6 @@ public class UIManager : MonoBehaviour
             currentAnswers.Add(newAnswer);
         }
     }
-
     void EraseAnswers()
     {
         foreach (var answer in currentAnswers)
@@ -208,7 +148,6 @@ public class UIManager : MonoBehaviour
         }
         currentAnswers.Clear();
     }
-
     void UpdateScoreUI()
     {
         uiElements.ScoreText.text = "Score: " + events.CurrentFinalScore;

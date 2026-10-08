@@ -34,9 +34,7 @@ public class AnswersData : MonoBehaviour
             return _rect;
         }
     }
-
     private int _answerIndex = -1;
-
     public int AnswerIndex
     {
         get { return _answerIndex; }
@@ -50,14 +48,12 @@ public class AnswersData : MonoBehaviour
         _answerIndex = index;
         Reset();
     }
-
     public void Reset()
     {
         Checked = false;
         toggle.color = normalColor;
         UpdateUI();
     }
-
     public void SwitchState()
     {
         Checked = !Checked;
@@ -68,17 +64,14 @@ public class AnswersData : MonoBehaviour
             events.UpdateAnswerUI(this);
         }
     }
-
     public void SetCorrect()
     {
         toggle.color = correctColor;
     }
-
     public void SetIncorrect()
     {
         toggle.color = incorrectColor;
     }
-
     void UpdateUI()
     {
         toggle.sprite = Checked ? checkedToggle : uncheckedToggle;
