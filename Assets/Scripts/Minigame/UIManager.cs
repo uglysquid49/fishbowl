@@ -57,6 +57,10 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] UIElements uiElements;
 
+    [Header("Finish Screen")]
+    [SerializeField] GameObject finishPanel;
+    [SerializeField] TextMeshProUGUI finalScoreText;
+
     [Space]
     [SerializeField] UIManagerParameters mParameters;
 
@@ -86,24 +90,40 @@ public class UIManager : MonoBehaviour
     {
         uiElements.QuestionInfoTextObject.text = question.Info;
         uiElements.QuestionImage.sprite = question.QuestionImage;
+
+        uiElements.QuestionImage.color = Color.black;
+
         CreateAnswers(question);
     }
+    public void ResetQuestionImageColor()
+    {
+        uiElements.QuestionImage.color = Color.white;
+    }
+
     void DisplayResolution(ResolutionScreenType type, int score)
     {
 
+        if (type == ResolutionScreenType.Finish)
+        {
+            uiElements.MainCanvasGroup.blocksRaycasts = false;
+
+            finishPanel.SetActive(true);
+            finalScoreText.text = "Final Score: " + score;
+
+            return;
+        }
+
         uiElements.MainCanvasGroup.blocksRaycasts = false;
 
-        if (type != ResolutionScreenType.Finish)
+        if (IE_DisplayTimedResolution != null)
         {
-            if (IE_DisplayTimedResolution != null)
-            {
-                StopCoroutine(IE_DisplayTimedResolution);
-            }
-
-            IE_DisplayTimedResolution = DisplayTimedResolution();
-            StartCoroutine(IE_DisplayTimedResolution);
+            StopCoroutine(IE_DisplayTimedResolution);
         }
+
+        IE_DisplayTimedResolution = DisplayTimedResolution();
+        StartCoroutine(IE_DisplayTimedResolution);
     }
+
     IEnumerator DisplayTimedResolution()
     {
         yield return new WaitForSeconds(GameUtility.ResolutionDelayTime);

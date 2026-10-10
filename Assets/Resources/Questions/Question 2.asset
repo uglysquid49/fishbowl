@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Question 2
   m_EditorClassIdentifier: Assembly-CSharp::Question
   _info: What color is your bed?
-  _questionImage: {fileID: 0}
+  _questionImage: {fileID: 21300000, guid: 39952d9aee7d1c84a89589a454b188be, type: 3}
   _answers:
   - _info: Orange
     _isCorrect: 1
@@ -23,7 +23,5 @@ MonoBehaviour:
     _isCorrect: 0
   - _info: Purple
     _isCorrect: 0
-  _useTimer: 0
-  _timer: 0
   _answerType: 1
-  _addScore: 10
+  _addScore: 100

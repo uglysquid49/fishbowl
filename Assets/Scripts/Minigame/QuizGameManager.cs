@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class QuizGameManager : MonoBehaviour
 {
+    [SerializeField] private UIManager uiManager;
     #region Variables
     private Question[] _questions = null;
     public Question[] Questions { get { return _questions; } }
@@ -167,24 +168,38 @@ public class QuizGameManager : MonoBehaviour
     #endregion
 
     #region Answer Checking
+
     public void Accept()
     {
         bool isCorrect = CheckAnswers();
 
         ShowAnswerResult();
 
+        uiManager.ResetQuestionImageColor();
+
         FinishedQuestions.Add(currentQuestion);
 
-        UpdateScore(isCorrect ? Questions[currentQuestion].AddScore : -Questions[currentQuestion].AddScore);
+        UpdateScore(isCorrect
+            ? Questions[currentQuestion].AddScore
+            : -Questions[currentQuestion].AddScore);
 
         if (IsFinished)
         {
             SetHighscore();
+
+            if (events.DisplayResolutionScreenUI != null)
+            {
+                events.DisplayResolutionScreenUI(
+                    UIManager.ResolutionScreenType.Finish,
+                    events.CurrentFinalScore
+                );
+            }
             return;
         }
 
         StartCoroutine(WaitTillNextRound());
     }
+
     bool CheckAnswers()
     {
         if (!CompareAnswers())
@@ -234,7 +249,7 @@ public class QuizGameManager : MonoBehaviour
     IEnumerator WaitTillNextRound()
     {
         yield return new WaitForSeconds(GameUtility.ResolutionDelayTime);
-
+        uiManager.ResetQuestionImageColor();
         Display();
     }
     #endregion
