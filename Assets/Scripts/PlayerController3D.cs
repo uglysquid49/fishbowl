@@ -26,6 +26,7 @@ public class PlayerController3D : MonoBehaviour
 
     private Vector2 lookInput;
     private float xRotation = 0f;
+    public bool freezePlayer;
 
     private void Start()
     {
@@ -40,6 +41,20 @@ public class PlayerController3D : MonoBehaviour
         Cursor.visible = false;
 
         currentMoveSpeed = WalkSpeed;
+    }
+
+    public void FreezePlayer()
+    {
+        freezePlayer = true;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void Unfreeze()
+    {
+        freezePlayer = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()

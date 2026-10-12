@@ -7,6 +7,9 @@ public class QuestPoint3D : MonoBehaviour
     [SerializeField] private QuestInfo questInfoAsset;
     [SerializeField] string miniGameName;
 
+    [Header("Cursor Settings")]
+    public PlayerController3D playerController3D;
+
     [Header("Trigger Tag Validation")]
     [SerializeField] private string playerTag = "Player";
 
@@ -17,6 +20,7 @@ public class QuestPoint3D : MonoBehaviour
             if (questInfoAsset != null && QuestManager.instance != null)
             {
                 QuestManager.instance.StartQuest(questInfoAsset.id);
+                //playerController3D.FreezePlayer();
 
                 Debug.Log($"3D Trigger fired for quest asset: {questInfoAsset.questName}");
                 SceneManager.LoadScene(miniGameName, LoadSceneMode.Additive);
