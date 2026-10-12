@@ -20,7 +20,7 @@ public class QuestPoint3D : MonoBehaviour
             if (questInfoAsset != null && QuestManager.instance != null)
             {
                 QuestManager.instance.StartQuest(questInfoAsset.id);
-                //playerController3D.FreezePlayer();
+                playerController3D.FreezePlayer();
 
                 Debug.Log($"3D Trigger fired for quest asset: {questInfoAsset.questName}");
                 SceneManager.LoadScene(miniGameName, LoadSceneMode.Additive);
