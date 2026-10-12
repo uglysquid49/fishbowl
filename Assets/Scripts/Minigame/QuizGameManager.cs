@@ -168,7 +168,6 @@ public class QuizGameManager : MonoBehaviour
     #endregion
 
     #region Answer Checking
-
     public void Accept()
     {
         bool isCorrect = CheckAnswers();

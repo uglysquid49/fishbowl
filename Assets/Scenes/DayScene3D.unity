@@ -12162,6 +12162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::QuestPoint3D
   questInfoAsset: {fileID: 11400000, guid: 197e74ea9003c4a42b25642c8de399d6, type: 2}
   miniGameName: ClickCircles
+  playerController3D: {fileID: 0}
   playerTag: Player
 --- !u!4 &2118386208 stripped
 Transform:
