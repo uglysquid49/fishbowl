@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6322ed15b68b343b82785f52aa5327, type: 3}
   m_Name: FeedTheFish
   m_EditorClassIdentifier: Assembly-CSharp::QuestInfo
-  <id>k__BackingField: 
-  <questName>k__BackingField: 
-  prefabTargetID: 
+  <id>k__BackingField: 90f1ae1a-b455-4aec-9bf5-ceceebc2c7e1
+  <questName>k__BackingField: FeedingFishy
+  prefabTargetID: FeedingFishy

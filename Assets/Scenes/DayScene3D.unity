@@ -5309,6 +5309,7 @@ Transform:
   m_Children:
   - {fileID: 2118184938}
   - {fileID: 1148702845}
+  - {fileID: 1424223233}
   m_Father: {fileID: 1292962575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &975742637
@@ -6661,7 +6662,7 @@ Transform:
   m_GameObject: {fileID: 1148702844}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.45, y: -0.364, z: -0.51}
+  m_LocalPosition: {x: 0.16, y: 0.06, z: 0.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6686,8 +6687,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.9964056, y: 0.42006996, z: 1.045958}
-  m_Center: {x: -0.0017971992, y: 0.040923074, z: 0.22253966}
+  m_Size: {x: 0.9964056, y: 0.26630038, z: 1.339591}
+  m_Center: {x: -0.0017971992, y: -0.17258564, z: 0.36935616}
 --- !u!114 &1148702847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8446,6 +8447,76 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: feda76974fed9a04281aabd5b2252714, type: 3}
+--- !u!1 &1424223232
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1424223233}
+  - component: {fileID: 1424223235}
+  - component: {fileID: 1424223234}
+  m_Layer: 0
+  m_Name: FeedingFish
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1424223233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424223232}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.391, y: 0.653, z: -2.179}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 969103737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1424223234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424223232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70c523cf57937f24fb13a9bbb3c2801a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::QuestPoint3D
+  questInfoAsset: {fileID: 11400000, guid: 55f59c4d124e67d4fadd5b20a787562f, type: 2}
+  miniGameName: FeedingFishy
+  playerController3D: {fileID: 1899727743}
+  playerTag: Player
+--- !u!65 &1424223235
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424223232}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.69959164, y: 0.46335286, z: 0.782114}
+  m_Center: {x: 0.0049557686, y: -0.04637608, z: -0.026176453}
 --- !u!1001 &1434184338
 PrefabInstance:
   m_ObjectHideFlags: 0
