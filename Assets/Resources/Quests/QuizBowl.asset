@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db6322ed15b68b343b82785f52aa5327, type: 3}
   m_Name: QuizBowl
   m_EditorClassIdentifier: Assembly-CSharp::QuestInfo
-  <id>k__BackingField: 
-  <questName>k__BackingField: 
-  prefabTargetID: 
+  <id>k__BackingField: 1e8e63c5-6461-429a-938c-e37149e36484
+  <questName>k__BackingField: QuizBowl
+  prefabTargetID: QuizBowl
