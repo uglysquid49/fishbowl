@@ -11089,7 +11089,6 @@ GameObject:
   - component: {fileID: 1899727740}
   - component: {fileID: 1899727743}
   - component: {fileID: 1899727745}
-  - component: {fileID: 1899727746}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11324,19 +11323,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1899727746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1899727739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0d4dcdf8f750cf4a8d97b9887c358ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerDoorPush
-  pushForce: 3
 --- !u!1 &1900991308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d628120d7e36b4841a218fa26f96c05f, type: 3}
