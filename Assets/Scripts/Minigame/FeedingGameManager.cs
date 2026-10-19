@@ -1,13 +1,13 @@
-
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FeedingGameManager : MonoBehaviour
 {
     public static FeedingGameManager Instance;
 
     public TMP_Text scoreText;
-    public TMP_Text gameOverText;
+    public GameObject winPanel;
 
     private int score = 0;
 
@@ -19,11 +19,6 @@ public class FeedingGameManager : MonoBehaviour
     void Start()
     {
         UpdateScore();
-
-        if (gameOverText != null)
-        {
-            gameOverText.gameObject.SetActive(false);
-        }
     }
 
     public void AddScore(int points)
@@ -36,16 +31,17 @@ public class FeedingGameManager : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Score: " + score;
+            scoreText.text = "Food eaten: " + score;
         }
     }
 
-    public void GameOver()
+    public void WinGame()
     {
-        if (gameOverText != null)
+        if (winPanel != null)
         {
-            gameOverText.gameObject.SetActive(true);
-            gameOverText.text = "GAME OVER!";
+            winPanel.SetActive(true);
         }
+
+        Time.timeScale = 0f;
     }
 }
