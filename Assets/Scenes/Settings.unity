@@ -884,6 +884,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677390133}
   m_CullTransparentMesh: 1
+--- !u!82 &686893470 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7716027850799080395, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+  m_PrefabInstance: {fileID: 8251313537654443200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &872816629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2291,7 +2296,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 505406780}
   m_HandleRect: {fileID: 990471717}
   m_Direction: 0
-  m_MinValue: -80
+  m_MinValue: -100
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
@@ -2628,6 +2633,14 @@ PrefabInstance:
       propertyPath: musicLibrary
       value: 
       objectReference: {fileID: 8251313537654443202}
+    - target: {fileID: 6168980927365876082, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: sfx2DSource
+      value: 
+      objectReference: {fileID: 686893470}
+    - target: {fileID: 6168980927365876082, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: sfx3DSource
+      value: 
+      objectReference: {fileID: 686893470}
     - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -33.61565
@@ -2667,6 +2680,10 @@ PrefabInstance:
     - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7716027850799080395, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_Volume
+      value: 0.492
       objectReference: {fileID: 0}
     - target: {fileID: 7716027850799080395, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
       propertyPath: OutputAudioMixerGroup

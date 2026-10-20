@@ -13,11 +13,19 @@ public class MainMenu : MonoBehaviour
     public Slider musicSlider;
     public Slider sfxSlider;
 
-    void Awake()
+    void Start()
     {
-        LoadVolume();
-        MusicManager.Instance.Playmusic("Game");
+        if (MusicManager.Instance != null)
+        {
+            LoadVolume();
+            MusicManager.Instance.Playmusic("Game");
+        }
+        else
+        {
+            Debug.Log("MusicManager Instance is missing from this scene..");
+        }
     }
+
     public void PlayGame()
     {
         StartCoroutine(PlaySoundAndLoadScene(gameSceneName));
@@ -44,11 +52,13 @@ public class MainMenu : MonoBehaviour
     public void UpdateMusicVolume(float volume)
     {
         audioMixer.SetFloat("MusicVolume", volume);
+        SaveVolume();
     }
 
     public void UpdateSoundVolume(float volume)
     {
         audioMixer.SetFloat("SFXVolume", volume);
+        SaveVolume();
     }
 
     public void SaveVolume()
@@ -58,11 +68,24 @@ public class MainMenu : MonoBehaviour
 
         audioMixer.GetFloat("SFXVolume", out float sfxVolume);
         PlayerPrefs.SetFloat("SFXVolume", sfxVolume);
+        PlayerPrefs.Save();
     }
 
     public void LoadVolume()
     {
-        musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
+        float savedMusic = PlayerPrefs.GetFloat("MusicVolume", 0.75f);
+        float savedSFX = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
+
+        if (musicSlider != null)
+        {
+            musicSlider.value = savedMusic;
+        }
+        if (sfxSlider != null)
+        {
+            sfxSlider.value = savedSFX;
+        }
+        UpdateMusicVolume(savedMusic);
+        UpdateSoundVolume(savedSFX);
     }
+
 }

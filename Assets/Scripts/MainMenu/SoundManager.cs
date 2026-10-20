@@ -8,6 +8,8 @@ public class SoundManager : MonoBehaviour
     private SoundLibrary sfxLibrary;
     [SerializeField]
     private AudioSource sfx2DSource;
+
+    [SerializeField] private AudioSource sfx3DSource;
     private void Awake()
     {
         if (instance != null)
@@ -20,14 +22,15 @@ public class SoundManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
+
     public void PlaySound3D(AudioClip clip, Vector3 pos)
     {
-        if (clip != null)
+        if (clip != null && sfx3DSource != null)
         {
-            AudioSource.PlayClipAtPoint(clip, pos);
+            sfx3DSource.transform.position = pos;
+            sfx3DSource.PlayOneShot(clip);
         }
     }
-
     public void PlaySound3D(string soundName, Vector3 pos)
     {
         PlaySound3D(sfxLibrary.GetClipFromName(soundName), pos);
@@ -37,5 +40,6 @@ public class SoundManager : MonoBehaviour
     {
         sfx2DSource.PlayOneShot(sfxLibrary.GetClipFromName(soundName));
     }
+
 }
 

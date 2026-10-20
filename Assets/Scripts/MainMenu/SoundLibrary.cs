@@ -21,6 +21,6 @@ public class SoundLibrary : MonoBehaviour
             }
         }
 
-        return null; //if no audio is found, play nothing
+        return null; //if no audio is found play nothing
     }
 }
