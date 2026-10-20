@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class FeedingGameManager : MonoBehaviour
 {
@@ -9,7 +8,9 @@ public class FeedingGameManager : MonoBehaviour
     public TMP_Text scoreText;
     public GameObject winPanel;
 
-    private int score = 0;
+    public int foodGoal = 10;
+
+    private int foodEaten = 0;
 
     void Awake()
     {
@@ -23,7 +24,7 @@ public class FeedingGameManager : MonoBehaviour
 
     public void AddScore(int points)
     {
-        score += points;
+        foodEaten++;
         UpdateScore();
     }
 
@@ -31,7 +32,7 @@ public class FeedingGameManager : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Food eaten: " + score;
+            scoreText.text = foodEaten + "/" + foodGoal;
         }
     }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 public class FishFood : MonoBehaviour
 {
     public float sizeLevel = 0.25f;
-    public int points = 10;
+    public int points = 5;
 
     void OnTriggerEnter(Collider other)
     {

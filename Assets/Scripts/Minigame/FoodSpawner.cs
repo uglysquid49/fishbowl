@@ -7,7 +7,7 @@ public class FoodSpawner : MonoBehaviour
     public static FoodSpawner Instance;
 
     public GameObject foodPrefab;
-    public int startingFoodCount = 10;
+    public int startingFoodCount = 5;
     public float spawnDelay = 1f;
 
     [Header("Spawn Settings")]
