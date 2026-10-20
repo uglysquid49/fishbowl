@@ -11,9 +11,12 @@ public class InteractionSystem : MonoBehaviour
 
     bool player_detection = false;
 
+    [Header("Dialogue Lines")]
+    public DialogueLine[] currentDialogue;
+
     [SerializeField]
     private InputActionReference actionReference;
-
+     
     [Header("Linked Components for Interactions")]
     public TextMeshProUGUI textBox;
     public GameObject dialogueUI;
@@ -29,13 +32,14 @@ public class InteractionSystem : MonoBehaviour
     public bool dialogueFinished = true;
 
     [Header("Dialogue")]
-    //public DialogueLine[] dialogueLines;
+   //ublic DialogueLine[] dialogueLines;
 
     #region PRIVATE VARIABLES
     private int currentIndex = 0;
 
     private Coroutine typingCoroutine;
     private bool justStarted = false;
+    private string fullText = "";
     #endregion
 
     private void OnEnable()
@@ -52,19 +56,56 @@ public class InteractionSystem : MonoBehaviour
     {
         if (player_detection && actionReference != null && actionReference.action.triggered)
         {
+
+           canva.SetActive(true);
+           dialogueUI.SetActive(true);
+
             Debug.Log("Dialogue Start!");
+            if (currentDialogue != null)
+            {
+                NewDialogue(currentDialogue[currentIndex].dialogueText);
+            }
+            else
+            {
+                NewDialogue("");
+            }
         }
     }
 
-
-    void NewDialogue (string text)
+    void NewDialogue(string text)
     {
-        GameObject template_clone = Instantiate(dialogueUI, dialogueUI.transform);
-        template_clone.transform.parent = canva.transform;
-        template_clone.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = text;
+        if (dialogueUI != null)
+        {
+            TextMeshProUGUI tmpText = dialogueUI.GetComponentInChildren<TextMeshProUGUI>();
+            if (tmpText != null)
+            {
+                if (typingCoroutine != null) 
+                {
+                    StopCoroutine(typingCoroutine);
+                }
+
+                fullText = text;
+                typingCoroutine = StartCoroutine(TypeText(tmpText));
+            }
+        }
+    }
+    IEnumerator TypeText(TextMeshProUGUI tmpText)
+    {
+        isTyping = true;
+        dialogueFinished = false;
+        tmpText.text = "";
+
+        foreach (char letter in fullText.ToCharArray())
+        {
+            tmpText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        isTyping = false;
+        dialogueFinished = true;
     }
 
-    private void OnTriggerEnter(Collider other)
+private void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
@@ -72,8 +113,16 @@ public class InteractionSystem : MonoBehaviour
         }
     }
 
+
     private void OnTriggerExit(Collider other)
     {
-        player_detection = false;
+        if (other.name == "Player")
+        {
+            player_detection = false;
+
+            if (dialogueUI != null) dialogueUI.SetActive(false);
+            if (canva != null) canva.SetActive(false);
+            print("Player out of range");
+        }
     }
 }
