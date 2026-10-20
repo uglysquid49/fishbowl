@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
+//using UnityEngine.InputSystem.LowLevel;
 
 public class CustomMouse : MonoBehaviour
 {
@@ -72,6 +72,20 @@ public class CustomMouse : MonoBehaviour
     {
         if (Gamepad.current == null || Mouse.current == null) return;
 
+        // Checking if the "primary" button on controllers = the south button is pressed
+        if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+        {
+            InputSystem.QueueButtonPressEvent(Mouse.current.leftButton, true);
+        }
+        else if (Gamepad.current.buttonSouth.wasReleasedThisFrame)
+        {
+            InputSystem.QueueButtonPressEvent(Mouse.current.leftButton, false);
+        }
+    }
 
+    void OnDisable()
+    {
+        Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+        Cursor.lockState = CursorLockMode.None;
     }
 }
