@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClickTheCircles : MonoBehaviour
 {
@@ -62,5 +63,9 @@ public class ClickTheCircles : MonoBehaviour
     {
         minigameCanvas.SetActive(false);
         Debug.Log("wow you can click");
+
+        // This returns player to main scene when completed BUT it returns player back to the start
+        // TODO : add line to destroy trigger zone after completed once so player can't go again
+        SceneManager.LoadScene("DayScene3D");
     }
 }
