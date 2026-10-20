@@ -17,6 +17,9 @@ public class PlayerController3D : MonoBehaviour
     private CharacterController characterController;
     private Rigidbody rb;
 
+    //dialogue 
+    static public bool dialogue = false;
+
     private InputAction moveInput;
     // private InputAction jumpInput;
 
