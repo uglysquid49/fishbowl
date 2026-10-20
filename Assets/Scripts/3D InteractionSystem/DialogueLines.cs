@@ -7,6 +7,7 @@ public enum SpeakerType
 [System.Serializable]
 public class DialogueLine
 {
-    [TextArea(1, 3)]
+    public string speakerName;
+    [TextArea(3, 10)]
     public string dialogueText;
 }

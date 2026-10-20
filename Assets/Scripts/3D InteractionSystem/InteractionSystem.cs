@@ -16,9 +16,10 @@ public class InteractionSystem : MonoBehaviour
 
     [SerializeField]
     private InputActionReference actionReference;
-     
+
     [Header("Linked Components for Interactions")]
     public TextMeshProUGUI textBox;
+    public TextMeshProUGUI speakerText;
     public GameObject dialogueUI;
     public GameObject canva;
     private GameObject currentDialogueUI;
@@ -32,7 +33,7 @@ public class InteractionSystem : MonoBehaviour
     public bool dialogueFinished = true;
 
     [Header("Dialogue")]
-   //ublic DialogueLine[] dialogueLines;
+    //public DialogueLine[] dialogueLines;
 
     #region PRIVATE VARIABLES
     private int currentIndex = 0;
@@ -56,34 +57,47 @@ public class InteractionSystem : MonoBehaviour
     {
         if (player_detection && actionReference != null && actionReference.action.triggered)
         {
-
-           canva.SetActive(true);
-           dialogueUI.SetActive(true);
-
-            Debug.Log("Dialogue Start!");
-            if (currentDialogue != null)
+            if (isTyping)
             {
-                NewDialogue(currentDialogue[currentIndex].dialogueText);
+                DialogueFinished();
+                return;
             }
-            else
+
+            if (currentDialogue != null && currentDialogue.Length > 0)
             {
-                NewDialogue("");
+                if (currentIndex < currentDialogue.Length)
+                {
+                    canva.SetActive(true);
+                    dialogueUI.SetActive(true);
+
+                    NewDialogue(currentDialogue[currentIndex].speakerName, currentDialogue[currentIndex].dialogueText);
+
+                    currentIndex++;
+                    Debug.Log("currently yapping");
+                }
+                else
+                {
+                    EndDialogue();
+                    Debug.Log("Dialogue over...");
+                }
             }
         }
     }
 
-    void NewDialogue(string text)
+    void NewDialogue(string speaker, string text)
     {
         if (dialogueUI != null)
         {
-            TextMeshProUGUI tmpText = dialogueUI.GetComponentInChildren<TextMeshProUGUI>();
+            TextMeshProUGUI tmpText = textBox != null ? textBox : dialogueUI.GetComponentInChildren<TextMeshProUGUI>();
+
+            if (speakerText != null)
+            {
+                speakerText.text = speaker;
+            }
+
             if (tmpText != null)
             {
-                if (typingCoroutine != null) 
-                {
-                    StopCoroutine(typingCoroutine);
-                }
-
+                if (typingCoroutine != null) StopCoroutine(typingCoroutine);
                 fullText = text;
                 typingCoroutine = StartCoroutine(TypeText(tmpText));
             }
@@ -104,15 +118,35 @@ public class InteractionSystem : MonoBehaviour
         isTyping = false;
         dialogueFinished = true;
     }
+    void DialogueFinished()
+    {
+        if (typingCoroutine != null) StopCoroutine(typingCoroutine);
 
-private void OnTriggerEnter(Collider other)
+        TextMeshProUGUI tmpText = textBox != null ? textBox : dialogueUI.GetComponentInChildren<TextMeshProUGUI>();
+        if (tmpText != null)
+        {
+            tmpText.text = fullText;
+        }
+
+        isTyping = false;
+        dialogueFinished = true;
+    }
+    void EndDialogue()
+    {
+        if (dialogueUI != null) dialogueUI.SetActive(false);
+        if (canva != null) canva.SetActive(false);
+
+        currentIndex = 0;
+        dialogueFinished = true;
+        isTyping = false;
+    }
+    private void OnTriggerEnter(Collider other)
     {
         if (other.name == "Player")
         {
             player_detection = true;
         }
     }
-
 
     private void OnTriggerExit(Collider other)
     {
@@ -126,3 +160,4 @@ private void OnTriggerEnter(Collider other)
         }
     }
 }
+
