@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.UI;
 
 public class CustomMouseCursor : MonoBehaviour
 {
@@ -11,6 +12,6 @@ public class CustomMouseCursor : MonoBehaviour
 
     private void Awake()
     {
-        Cursor.SetCursor(mouseCursor, hotSpot, cursorMode);
+        Cursor.SetCursor(mouseCursor, hotSpot, CursorMode.ForceSoftware);
     }
 }
