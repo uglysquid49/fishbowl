@@ -4384,6 +4384,75 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1001 &740263174
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 512279512932291593, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.12597
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.21772
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 10.06358
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7841650763290105885, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: soundEffects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7841650763290105885, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: soundEffects.Array.data[1].groupID
+      value: Dialogue
+      objectReference: {fileID: 0}
+    - target: {fileID: 7841650763290105885, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: soundEffects.Array.data[1].clips.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
 --- !u!1 &762450179 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3379836402047742272, guid: 32641975705e27f48984153cb67f2026, type: 3}
@@ -12418,8 +12487,10 @@ MonoBehaviour:
   currentDialogue:
   - speakerName: Fish
     dialogueText: What an ugly lamp.
+    interactionSoundName: 
   - speakerName: Kid
     dialogueText: My mother seems to like it..
+    interactionSoundName: 
   actionReference: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   textBox: {fileID: 1891104910}
   speakerText: {fileID: 2109567108}
@@ -13093,6 +13164,7 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1292962575}
+  - {fileID: 740263174}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1158490}

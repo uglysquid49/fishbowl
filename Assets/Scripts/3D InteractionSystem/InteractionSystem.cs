@@ -70,6 +70,14 @@ public class InteractionSystem : MonoBehaviour
                     canva.SetActive(true);
                     dialogueUI.SetActive(true);
 
+                    //sfx for interaction
+                    string soundName = currentDialogue[currentIndex].interactionSoundName;
+                    if (!string.IsNullOrEmpty(soundName) && SoundManager.instance != null)
+                    {
+                        SoundManager.instance.PlaySound2D(soundName);
+                    print("sound on");
+                    }
+
                     NewDialogue(currentDialogue[currentIndex].speakerName, currentDialogue[currentIndex].dialogueText);
 
                     currentIndex++;
