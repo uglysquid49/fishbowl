@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/ClickCircles.unity
     guid: 5693d76010237ab4c8626d7df546c65d
   - enabled: 1
+    path: Assets/Scenes/FeedingFishy.unity
+    guid: f93f2ca653acbc548816921fb2fb4397
+  - enabled: 1
     path: Assets/Scenes/QuizBowl.unity
     guid: 534d28670cb94534797c8c5232c8ee22
   m_configObjects:
