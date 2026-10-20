@@ -8,6 +8,9 @@ public class QuestManager : MonoBehaviour
     [Header("Persistence Configuration")]
     [SerializeField] private string saveFileName = "rpg_prefab_quest_save_data";
 
+    [Header("Day and Night System")]
+    [SerializeField] private DayNightManager dayNightManager;
+
     public static QuestManager instance { get; private set; }
 
     private Dictionary<string, Quest> questMap = new Dictionary<string, Quest>();
@@ -69,6 +72,16 @@ public class QuestManager : MonoBehaviour
         if (quest != null && quest.state == QuestState.IN_PROGRESS)
         {
             quest.ChangeState(QuestState.FINISHED);
+
+            if (GameEventsManager.instance != null)
+            {
+                GameEventsManager.instance.questEvents.QuestStateChanged(quest);
+            }
+
+            if (dayNightManager != null)
+            {
+                dayNightManager.AdvanceTime();
+            }
 
             if (!string.IsNullOrEmpty(quest.GetPrefabTargetID()) && SceneMiniGameRegistry.instance != null)
             {

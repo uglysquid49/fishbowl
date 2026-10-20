@@ -476,6 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89274d1e08472fe4d927d75e9ecf1089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ClickTheCircles
+  questInfo: {fileID: 11400000, guid: 197e74ea9003c4a42b25642c8de399d6, type: 2}
   minigameCanvas: {fileID: 1554041848}
   circle: {fileID: 575399063}
   playArea: {fileID: 139995437}
@@ -678,7 +679,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.31425774, g: 0.6226415, b: 0.5455456, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

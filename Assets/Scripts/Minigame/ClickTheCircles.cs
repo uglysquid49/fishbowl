@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class ClickTheCircles : MonoBehaviour
 {
+    [Header("Quest Settings")]
+    [SerializeField] private QuestInfo questInfo;
+
     public GameObject minigameCanvas;
     public RectTransform circle;
     public RectTransform playArea;
@@ -62,10 +65,15 @@ public class ClickTheCircles : MonoBehaviour
     void EndMinigame()
     {
         minigameCanvas.SetActive(false);
-        Debug.Log("wow you can click");
+        Debug.Log("Circle minigame completed!");
 
-        // This returns player to main scene when completed BUT it returns player back to the start
-        // TODO : add line to destroy trigger zone after completed once so player can't go again
-        SceneManager.LoadScene("DayScene3D");
+        // Mark the quest as finished
+        if (questInfo != null && QuestManager.instance != null)
+        {
+            QuestManager.instance.CompleteAndCloseQuest(questInfo.id);
+        }
+
+        // Close only the minigame scene
+        SceneManager.UnloadSceneAsync(gameObject.scene);
     }
 }
