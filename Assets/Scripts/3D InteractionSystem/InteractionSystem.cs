@@ -67,6 +67,7 @@ public class InteractionSystem : MonoBehaviour
             {
                 if (currentIndex < currentDialogue.Length)
                 {
+                    SoundManager.instance.PlaySound3D("Interaction", transform.position);
                     canva.SetActive(true);
                     dialogueUI.SetActive(true);
 
