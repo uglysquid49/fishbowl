@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!82 &8718116 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7716027850799080395, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+  m_PrefabInstance: {fileID: 303961718}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &167581219 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b2e54dcac9cc2fe439221eff8a025a96, type: 3}
@@ -424,6 +429,10 @@ PrefabInstance:
       propertyPath: musicLibrary
       value: 
       objectReference: {fileID: 303961720}
+    - target: {fileID: 6168980927365876082, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
+      propertyPath: sfx3DSource
+      value: 
+      objectReference: {fileID: 8718116}
     - target: {fileID: 6629839322185730352, guid: aebd8ef90d9f2b84b8e4064c774d691a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -33.61565
@@ -766,7 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa3e177d5a9c9174bbfa7c7a4e887f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
-  gameSceneName: dialogueTest
+  gameSceneName: DayScene3D
   settingSceneName: Settings
   audioMixer: {fileID: 24100000, guid: a05e2a78a858df54fb8c6246fefe7817, type: 2}
   musicSlider: {fileID: 0}
