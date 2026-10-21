@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CharacterController))]
 
-public class PlayerController3D : MonoBehaviour
+public class PlayerController3D : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private float WalkSpeed = 5.5f;
 
@@ -31,6 +31,16 @@ public class PlayerController3D : MonoBehaviour
     private float xRotation = 0f;
     public bool freezePlayer;
 
+
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = this.transform.position;
+    }
     private void Start()
     {
         mainCamera = GetComponentInChildren<Camera>();
