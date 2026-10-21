@@ -75,5 +75,6 @@ public class ClickTheCircles : MonoBehaviour
 
         // Close only the minigame scene
         SceneManager.UnloadSceneAsync(gameObject.scene);
+        Cursor.visible = false;
     }
 }
