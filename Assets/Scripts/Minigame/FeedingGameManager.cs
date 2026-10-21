@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class FeedingGameManager : MonoBehaviour, IDataPersistence
+public class FeedingGameManager : MonoBehaviour
 {
     public static FeedingGameManager Instance;
 
@@ -23,19 +23,6 @@ public class FeedingGameManager : MonoBehaviour, IDataPersistence
     void Start()
     {
         UpdateScore();
-    }
-
-    public void LoadData(GameData data)
-    {
-        this.isGameCompleted = data.feedingGameCompleted;
-        if (this.isGameCompleted)
-        {
-            Debug.Log("Feeding freenzy OVER!!");
-        }
-    }
-    public void SaveData(ref GameData data)
-    {
-        data.feedingGameCompleted = this.isGameCompleted;
     }
 
     public void AddScore(int points)
@@ -60,11 +47,9 @@ public class FeedingGameManager : MonoBehaviour, IDataPersistence
         }
 
         isGameCompleted = true;
-        if (DataPersistenceManager.Instance != null)
-        {
-            DataPersistenceManager.Instance.SaveGame();
-            Debug.Log("game complete ! progresssed saved");
-        }
+        PlayerPrefs.SetInt("FeedingGameCompleted", 1);
+        PlayerPrefs.Save();
+
         Time.timeScale = 0f;
     }
 }

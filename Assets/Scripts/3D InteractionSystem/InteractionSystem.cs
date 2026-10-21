@@ -9,7 +9,7 @@ public class InteractionSystem : MonoBehaviour
 {
     public static InteractionSystem instance;
 
-    bool player_detection = false;
+    public bool player_detection = false;
 
     [Header("Dialogue Lines")]
     public DialogueLine[] currentDialogue;
@@ -35,22 +35,39 @@ public class InteractionSystem : MonoBehaviour
     [Header("Dialogue")]
     //public DialogueLine[] dialogueLines;
 
+    [Header("3D Indicator Settings")]
+    [Tooltip("Drag your 3D interaction model (exclamation point, question mark, arrow, etc.) here")]
+    public GameObject interactionIndicator;
+
     #region PRIVATE VARIABLES
     private int currentIndex = 0;
 
     private Coroutine typingCoroutine;
     private bool justStarted = false;
     private string fullText = "";
+    private Vector3 indicatorStartPosition;
+    private bool hasRecordedPosition = false;
     #endregion
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+    }
 
     private void OnEnable()
     {
-        actionReference.action.Enable();
+        if (actionReference != null && actionReference.action != null)
+            {
+            actionReference.action.Enable();
+        }
     }
 
     private void OnDisable()
     {
-        actionReference.action.Disable();
+        if (actionReference != null && actionReference.action != null)
+        {
+            actionReference.action.Disable();
+        }
     }
 
     void Update()
@@ -62,13 +79,22 @@ public class InteractionSystem : MonoBehaviour
                 DialogueFinished();
                 return;
             }
+            //interaction icon hidden while dialogue is on
+            if (interactionIndicator != null) interactionIndicator.SetActive(false);
 
             if (currentDialogue != null && currentDialogue.Length > 0)
             {
                 if (currentIndex < currentDialogue.Length)
                 {
-                    SoundManager.instance.PlaySound3D("Interaction", transform.position);
-                    canva.SetActive(true);
+                    if (SoundManager.instance != null)
+                    {
+                        SoundManager.instance.PlaySound3D("Interaction", transform.position);
+                    }
+                    else
+                    {
+                        Debug.Log("soundmanger is missing");
+                    }
+                        canva.SetActive(true);
                     dialogueUI.SetActive(true);
 
                     //sfx for interaction
@@ -148,23 +174,39 @@ public class InteractionSystem : MonoBehaviour
         currentIndex = 0;
         dialogueFinished = true;
         isTyping = false;
+
+        if (player_detection && interactionIndicator != null)
+        {
+            interactionIndicator.SetActive(true);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player")
+        if (other.name == "Player" || other.name == "Player")
         {
             player_detection = true;
+
+            if (interactionIndicator != null)
+            {
+                interactionIndicator.SetActive(true);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.name == "Player")
+        if (other.CompareTag("Player") || other.name == "Player")
         {
             player_detection = false;
-
+            if (interactionIndicator != null)
+            {
+                interactionIndicator.SetActive(false);
+                Debug.Log("interaction icon GONE");
+            }
             if (dialogueUI != null) dialogueUI.SetActive(false);
             if (canva != null) canva.SetActive(false);
+
+            currentIndex = 0;
             print("Player out of range");
         }
     }

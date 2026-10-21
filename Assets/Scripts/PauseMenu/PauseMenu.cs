@@ -8,8 +8,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject settingMenu;
 
-    [SerializeField] private SaveSlotsMenu saveSlotsMenu;
-
     [Header("Map Control")]
     [SerializeField] private PlayerInput playerInput;
 
@@ -18,9 +16,6 @@ public class PauseMenu : MonoBehaviour
 
     [Header("Scene Changes")]
     [SerializeField] private string quitSceneName = "";
-
-    [Header("Save Feedback UI")]
-    [SerializeField] private GameObject saveConfirmationText;
 
     private bool isPauesd = false;
     private bool isPaused;
@@ -53,6 +48,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
         pauseMenu.SetActive(false);
         settingMenu.SetActive(false);
 
@@ -70,6 +66,8 @@ public class PauseMenu : MonoBehaviour
 
     public void PauseGame()
     {
+
+        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
         pauseMenu.SetActive(true);
         settingMenu.SetActive(false);
 
@@ -99,21 +97,6 @@ public class PauseMenu : MonoBehaviour
         SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
         settingMenu.SetActive(false); 
         pauseMenu.SetActive(true);  
-    }
-
-    public void saveButton()
-    {
-        if (DataPersistenceManager.Instance != null)
-        {
-              SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
-            DataPersistenceManager.Instance.SaveGame();
-
-            Debug.Log("Game Saved!");
-        }
-        else
-        {
-            Debug.LogError("DataPersistenceManager Instance not found in scene!");
-        }
     }
 
     public void MainMenu()
