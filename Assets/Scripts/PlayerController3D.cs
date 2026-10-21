@@ -37,6 +37,8 @@ public class PlayerController3D : MonoBehaviour, IDataPersistence
         this.transform.position = data.playerPosition;
     }
 
+
+
     public void SaveData(ref GameData data)
     {
         data.playerPosition = this.transform.position;

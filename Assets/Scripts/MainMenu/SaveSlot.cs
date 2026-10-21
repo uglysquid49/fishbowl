@@ -1,5 +1,7 @@
 using TMPro;
+using Unity.VectorGraphics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SaveSlot : MonoBehaviour
 {
@@ -13,12 +15,16 @@ public class SaveSlot : MonoBehaviour
     //slot name
     [SerializeField] private TextMeshProUGUI slotText;
 
+    [SerializeField] private string sceneName = "DayScene3D";
+
+    private bool hasData = false;
 
     public void SetData(GameData data)
     {
         if (data == null)
         {
             // No data for profileId
+            hasData = false;
             noDataContent.SetActive(true);
             hasDataContent.SetActive(false);
 
@@ -31,6 +37,7 @@ public class SaveSlot : MonoBehaviour
         else
         {
             // Data exists
+            hasData = true;
             noDataContent.SetActive(false);
             hasDataContent.SetActive(true);
 
@@ -41,6 +48,23 @@ public class SaveSlot : MonoBehaviour
         }
     }
 
+    public void OnSaveSlotClicked()
+    {
+        if (!hasData)
+        {
+            Debug.Log("empty slot");
+            return;
+        }
+
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        }
+
+        DataPersistenceManager.Instance.ChangeSelectedProfileId(this.profileId);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(sceneName);
+    }
 
 
     public string GetProfileId()

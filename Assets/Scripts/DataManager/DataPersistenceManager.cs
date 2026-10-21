@@ -53,11 +53,9 @@ public class DataPersistenceManager : MonoBehaviour
 
         this.gameData = dataHandler.Load(selectedProfileId);
 
-        if (this.gameData == null)
-        {
-            Debug.Log("No Data was found. Initializing New Game.");
-            NewGame();
-        }
+        if (this.gameData == null) NewGame();
+
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
 
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
@@ -76,6 +74,8 @@ public class DataPersistenceManager : MonoBehaviour
         {
             selectedProfileId = "1";
         }
+
+        this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
             dataPersistenceObj.SaveData(ref gameData);

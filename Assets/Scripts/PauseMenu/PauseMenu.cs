@@ -88,7 +88,7 @@ public class PauseMenu : MonoBehaviour
 
     public void OpenSettings()
     {
-        SoundManager.instance.PlaySound3D("Interaction", transform.position);
+        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
         pauseMenu.SetActive(false);
         settingMenu.SetActive(true); //opens setting panel
         Debug.Log("settingsOpen");
@@ -96,7 +96,7 @@ public class PauseMenu : MonoBehaviour
 
     public void CloseSettings()
     {
-        SoundManager.instance.PlaySound3D("Interaction", transform.position);
+        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
         settingMenu.SetActive(false); 
         pauseMenu.SetActive(true);  
     }
@@ -105,7 +105,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (DataPersistenceManager.Instance != null)
         {
-            SoundManager.instance.PlaySound3D("Interaction", transform.position);
+            SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
             DataPersistenceManager.Instance.SaveGame();
 
             Debug.Log("Game Saved!");
@@ -118,7 +118,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        SoundManager.instance.PlaySound3D("Interaction", transform.position);
+        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
         SceneManager.LoadScene(quitSceneName);
     }
 

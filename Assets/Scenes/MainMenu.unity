@@ -153,7 +153,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 337685864}
   - {fileID: 445446623}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -529,7 +528,19 @@ PrefabInstance:
     - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1377435511}
+      objectReference: {fileID: 1706400127}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSaveSlotClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveSlot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7502366300918780716, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_text
       value: 4
@@ -788,7 +799,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 153516025}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5213341240156352535, guid: e03b98676882e484a8e1d111748c094d, type: 3}
       propertyPath: m_Name
@@ -796,11 +807,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7308157231315880798, guid: e03b98676882e484a8e1d111748c094d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -85.19172
       objectReference: {fileID: 0}
     - target: {fileID: 7308157231315880798, guid: e03b98676882e484a8e1d111748c094d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 6.82329
       objectReference: {fileID: 0}
     - target: {fileID: 7308157231315880798, guid: e03b98676882e484a8e1d111748c094d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -839,11 +850,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e03b98676882e484a8e1d111748c094d, type: 3}
---- !u!4 &337685864 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7308157231315880798, guid: e03b98676882e484a8e1d111748c094d, type: 3}
-  m_PrefabInstance: {fileID: 337685863}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &359350361
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,7 +1024,19 @@ PrefabInstance:
     - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1377435511}
+      objectReference: {fileID: 1780837841}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSaveSlotClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveSlot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7502366300918780716, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_text
       value: 5
@@ -1777,7 +1795,19 @@ PrefabInstance:
     - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1377435511}
+      objectReference: {fileID: 963169408}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSaveSlotClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveSlot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7502366300918780716, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_text
       value: 6
@@ -1796,6 +1826,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2640080307226587164, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
   m_PrefabInstance: {fileID: 963169406}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &963169408 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9150640505720818191, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+  m_PrefabInstance: {fileID: 963169406}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1056a190474e57542956fe59ad3a53ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveSlot
 --- !u!1 &1089420210
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,7 +2363,19 @@ PrefabInstance:
     - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1377435511}
+      objectReference: {fileID: 1495296969}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSaveSlotClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveSlot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7502366300918780716, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_text
       value: 2
@@ -2341,6 +2394,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2640080307226587164, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
   m_PrefabInstance: {fileID: 1495296967}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1495296969 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9150640505720818191, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+  m_PrefabInstance: {fileID: 1495296967}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1056a190474e57542956fe59ad3a53ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveSlot
 --- !u!1 &1503366664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2836,6 +2900,28 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643825894}
   m_CullTransparentMesh: 1
+--- !u!114 &1706400127 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9150640505720818191, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+  m_PrefabInstance: {fileID: 277586922}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1056a190474e57542956fe59ad3a53ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveSlot
+--- !u!114 &1780837841 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9150640505720818191, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+  m_PrefabInstance: {fileID: 409017916}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1056a190474e57542956fe59ad3a53ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveSlot
 --- !u!1001 &1793551502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2931,7 +3017,19 @@ PrefabInstance:
     - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1377435511}
+      objectReference: {fileID: 1793551504}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSaveSlotClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveSlot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7502366300918780716, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_text
       value: 3
@@ -2950,6 +3048,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2640080307226587164, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
   m_PrefabInstance: {fileID: 1793551502}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1793551504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9150640505720818191, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+  m_PrefabInstance: {fileID: 1793551502}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1056a190474e57542956fe59ad3a53ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveSlot
 --- !u!1001 &1913808190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3281,6 +3390,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2640080307226587164, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
   m_PrefabInstance: {fileID: 8009979117961600209}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2109937816 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9150640505720818191, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+  m_PrefabInstance: {fileID: 8009979117961600209}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1056a190474e57542956fe59ad3a53ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveSlot
 --- !u!1 &2129794482
 GameObject:
   m_ObjectHideFlags: 0
@@ -3652,14 +3772,30 @@ PrefabInstance:
     - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1377435511}
+      objectReference: {fileID: 2109937816}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSaveSlotClicked
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SaveSlot, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6987712240215139360, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 7502366300918780716, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: m_text
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9150640505720818191, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
       propertyPath: profileId
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9150640505720818191, guid: e820f826154fbfd42bc8e6e8557d5540, type: 3}
+      propertyPath: sceneName
+      value: DayScene3D
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3670,6 +3806,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 337685863}
   - {fileID: 153516025}
   - {fileID: 1614085429}
   - {fileID: 1089420212}

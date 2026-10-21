@@ -151,6 +151,7 @@ MonoBehaviour:
   noDataContent: {fileID: 6927476668223320659}
   hasDataContent: {fileID: 6162758418547539049}
   slotText: {fileID: 7502366300918780716}
+  sceneName: DayScene3D
 --- !u!1 &2498668750477024373
 GameObject:
   m_ObjectHideFlags: 0
