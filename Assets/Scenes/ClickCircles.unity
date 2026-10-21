@@ -358,7 +358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &742194507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,6 +762,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CustomMouseCursor
   mouseCursor: {fileID: 2800000, guid: 96900282231496f4eaf08ab05c436172, type: 3}
   controllerSpeed: 500
+  cursorUIElement: {fileID: 1301770201}
+  scalerCanvas: {fileID: 742194509}
 --- !u!1 &1554041848
 GameObject:
   m_ObjectHideFlags: 0

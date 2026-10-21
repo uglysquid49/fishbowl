@@ -1,4 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class CustomMouseCursor : MonoBehaviour
 {
@@ -19,5 +22,26 @@ public class CustomMouseCursor : MonoBehaviour
     private void Awake()
     {
         Cursor.SetCursor(mouseCursor, hotSpot, CursorMode.ForceSoftware);
+    }
+
+    private void Start()
+    {
+        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+
+        if (cursorUIElement != null && mouseCursor != null)
+        {
+            Image cursorImage = cursorUIElement.GetComponent<Image>();
+            if (cursorImage != null)
+            {
+                Rect rect = new Rect (0, 0, mouseCursor.width, mouseCursor.height);
+                Sprite runtimeSprite = Sprite.Create(mouseCursor, rect, new Vector2(0f, 1f));
+                cursorImage.sprite = runtimeSprite;
+            }
+
+            cursorUIElement.pivot = new Vector2(0f, 1f);
+        }
+
+
     }
 }
