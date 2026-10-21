@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FeedingGameManager : MonoBehaviour
 {
@@ -49,6 +50,9 @@ public class FeedingGameManager : MonoBehaviour
         isGameCompleted = true;
         PlayerPrefs.SetInt("FeedingGameCompleted", 1);
         PlayerPrefs.Save();
+
+        // Closing mini-game scene
+        SceneManager.UnloadSceneAsync(gameObject.scene);
 
         Time.timeScale = 0f;
     }
