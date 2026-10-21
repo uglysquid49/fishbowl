@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class QuestCanvasUI : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class QuestCanvasUI : MonoBehaviour
         {
             GameEventsManager.instance.questEvents.onQuestStateChange += UpdateQuestUI;
         }
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
     private void OnDisable()
@@ -24,6 +28,22 @@ public class QuestCanvasUI : MonoBehaviour
         {
             GameEventsManager.instance.questEvents.onQuestStateChange -= UpdateQuestUI;
         }
+
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        SceneManager.sceneUnloaded -= OnSceneUnloaded;
+
+        CancelInvoke(nameof(HideNotificationPanel));
+    }
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        CancelInvoke(nameof(HideNotificationPanel));
+        questNotificationPanel.SetActive(false);
+    }
+
+    private void OnSceneUnloaded(Scene scene)
+    {
+        CancelInvoke(nameof(HideNotificationPanel));
+        questNotificationPanel.SetActive(false);
     }
 
     private void Start()
@@ -31,9 +51,21 @@ public class QuestCanvasUI : MonoBehaviour
         // Starting with UI notification display hidden
         questNotificationPanel.SetActive(false);
     }
-
+    private bool IsMinigameLoaded()
+    {
+        return UnityEngine.SceneManagement.SceneManager.GetSceneByName("ClickCircles").isLoaded ||
+               UnityEngine.SceneManagement.SceneManager.GetSceneByName("FeedingFishy").isLoaded ||
+               UnityEngine.SceneManagement.SceneManager.GetSceneByName("QuizBowl").isLoaded;
+    }
     private void UpdateQuestUI(Quest quest)
     {
+        CancelInvoke(nameof(HideNotificationPanel));
+
+        if (IsMinigameLoaded())
+        {
+            questNotificationPanel.SetActive(false);
+            return;
+        }
         // This will handle the displaying of info based on state changes
         if (quest.state == QuestState.IN_PROGRESS)
         {
@@ -53,6 +85,6 @@ public class QuestCanvasUI : MonoBehaviour
 
     private void HideNotificationPanel()
     {
-        questNotificationPanel.SetActive(true);
+        questNotificationPanel.SetActive(false);
     }
 }
