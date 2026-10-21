@@ -24,4 +24,4 @@ MonoBehaviour:
   - _info: Dodecahedron
     _isCorrect: 0
   _answerType: 1
-  _addScore: 100
+  _addScore: 10

@@ -24,4 +24,4 @@ MonoBehaviour:
   - _info: Goldfish
     _isCorrect: 1
   _answerType: 1
-  _addScore: 100
+  _addScore: 10

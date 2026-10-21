@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d4c3512d7cbb947bedf41abd2c1da4, type: 3}
   m_Name: Question 3
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  _info: 2 + 2 = ?
+  _info: You have 3 toys and get 1 more. How many toys do you have?
   _questionImage: {fileID: 0}
   _answers:
   - _info: 4
@@ -24,4 +24,4 @@ MonoBehaviour:
   - _info: 6
     _isCorrect: 0
   _answerType: 1
-  _addScore: 100
+  _addScore: 10
