@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using TMPro;
 
@@ -24,6 +25,7 @@ public class QuestCanvasUI : MonoBehaviour
         {
             GameEventsManager.instance.questEvents.onQuestStateChange -= UpdateQuestUI;
         }
+        CancelInvoke(nameof(HideNotificationPanel));
     }
 
     private void Start()
@@ -34,6 +36,8 @@ public class QuestCanvasUI : MonoBehaviour
 
     private void UpdateQuestUI(Quest quest)
     {
+        CancelInvoke(nameof(HideNotificationPanel));
+
         // This will handle the displaying of info based on state changes
         if (quest.state == QuestState.IN_PROGRESS)
         {
@@ -53,6 +57,6 @@ public class QuestCanvasUI : MonoBehaviour
 
     private void HideNotificationPanel()
     {
-        questNotificationPanel.SetActive(true);
+        questNotificationPanel.SetActive(false);
     }
 }

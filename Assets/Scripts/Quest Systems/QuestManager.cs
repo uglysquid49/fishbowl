@@ -15,6 +15,8 @@ public class QuestManager : MonoBehaviour
 
     private Dictionary<string, Quest> questMap = new Dictionary<string, Quest>();
 
+    public IEnumerable<Quest> AllQuests => questMap.Values;
+
     private void Awake()
     {
         if (instance != null)
