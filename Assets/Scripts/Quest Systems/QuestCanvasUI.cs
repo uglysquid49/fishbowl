@@ -10,7 +10,6 @@ public class QuestCanvasUI : MonoBehaviour
     [SerializeField] private GameObject questObjectiveGuidePanel;
     [SerializeField] private TextMeshProUGUI titleText;
     [SerializeField] private TextMeshProUGUI statusText;
-    [SerializeField] private GameObject questListPanel;
 
     [SerializeField] private CanvasGroup questObjectiveGuideCanvasGroup;
     [SerializeField] private float fadeDuration = 0.75f;
@@ -75,9 +74,6 @@ public class QuestCanvasUI : MonoBehaviour
 
     private IEnumerator ShowCompletionThenNextQuest()
     {
-        if (questListPanel != null)
-            questListPanel.SetActive(false);
-
         if (questObjectiveGuidePanel == null || statusText == null)
             yield break;
 
@@ -131,7 +127,9 @@ public class QuestCanvasUI : MonoBehaviour
     private void UpdateObjectiveGuide()
     {
         if (questObjectiveGuidePanel == null)
+        {
             return;
+        }
 
         if (IsMinigameLoaded() || QuestManager.instance == null)
         {
