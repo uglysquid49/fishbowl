@@ -12,8 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d4c3512d7cbb947bedf41abd2c1da4, type: 3}
   m_Name: Question 8
   m_EditorClassIdentifier: Assembly-CSharp::Question
-  _info: 
-  _questionImage: {fileID: 0}
-  _answers: []
-  _answerType: 0
-  _addScore: 100
+  _info: What should we pair cookies with?
+  _questionImage: {fileID: 21300000, guid: a18bcdec4287e3b439c92009d29428ed, type: 3}
+  _answers:
+  - _info: Coffee
+    _isCorrect: 0
+  - _info: Soda
+    _isCorrect: 0
+  - _info: Juice
+    _isCorrect: 0
+  - _info: Milk
+    _isCorrect: 1
+  _answerType: 1
+  _addScore: 10
