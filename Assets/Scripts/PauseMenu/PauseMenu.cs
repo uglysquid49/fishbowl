@@ -105,7 +105,7 @@ public class PauseMenu : MonoBehaviour
     {
         if (DataPersistenceManager.Instance != null)
         {
-            SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+              SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
             DataPersistenceManager.Instance.SaveGame();
 
             Debug.Log("Game Saved!");
@@ -118,7 +118,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        SoundManager.instance.PlaySound3D("MainMenuButton", transform.position);
         SceneManager.LoadScene(quitSceneName);
     }
 

@@ -30,29 +30,22 @@ public class SaveSlotsMenu : MonoBehaviour
         // Loads all profiles that exist cleanly from disk
         Dictionary<string, GameData> profilesGameData = DataPersistenceManager.Instance.GetAllProfilesGameData();
 
-            foreach (string diskid in profilesGameData.Keys)
-            {
-                Debug.Log("found save file");
-            }
-                
+        foreach (string diskid in profilesGameData.Keys)
+        {
+            Debug.Log("found save file");
+        }
 
-            // Loop each slot then set content
-            foreach (SaveSlot saveSlot in saveSlots)
-            {
-                GameData profileData = null;
-                profilesGameData.TryGetValue(saveSlot.GetProfileId(), out profileData);
-                saveSlot.SetData(profileData);
+
+        // Loop each slot then set content
+        foreach (SaveSlot saveSlot in saveSlots)
+        {
+            GameData profileData = null;
+            profilesGameData.TryGetValue(saveSlot.GetProfileId(), out profileData);
+            saveSlot.SetData(profileData);
             if (profileData != null && isLoadingGame)
-            {
-          //      saveSlot.SetInteractable(false);
-            }
-            else
-            {
-             //   saveSlot.SetInteractable(true);
-            }
-            }
+            { }
+        }
     }
-
     public void DeactivateMenu()
     {
         this.gameObject.SetActive(false);

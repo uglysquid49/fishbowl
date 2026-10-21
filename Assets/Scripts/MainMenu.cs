@@ -48,7 +48,7 @@ public class MainMenu : MonoBehaviour
     public void LoadGame()
     {
         SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
-        saveSlotsMenu.ActivateMenu();
+      //  saveSlotsMenu.ActivateMenu();
         this.DeactivateMenu();
     }
 

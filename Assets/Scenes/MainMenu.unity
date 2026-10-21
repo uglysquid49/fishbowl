@@ -2126,9 +2126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dc12a2343599964db8f981d8fc7f6c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSlotsMenu
-  onReturnPressed:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &1447302809
 GameObject:
   m_ObjectHideFlags: 0
