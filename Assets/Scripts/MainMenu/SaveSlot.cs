@@ -45,6 +45,6 @@ public class SaveSlot : MonoBehaviour
 
     public string GetProfileId()
     {
-        return this.profileId;
+        return this.profileId.Trim();
     }
 }

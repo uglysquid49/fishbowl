@@ -28,12 +28,12 @@ public class DataPersistenceManager : MonoBehaviour
         Instance = this;
 
         DontDestroyOnLoad(this.gameObject);
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
     }
 
     private void Start()
     {
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
-        // FIXED: Match the method name below
+       // this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
     }
 
@@ -67,15 +67,21 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
-        if (this.gameData == null) return; //dont save if there is nothing to save
-
+        if (this.gameData == null)
+        {
+            Debug.LogWarning("no active game, using default profileid");
+            NewGame();
+        }
+        if (string.IsNullOrEmpty(selectedProfileId))
+        {
+            selectedProfileId = "1";
+        }
         foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
         {
             dataPersistenceObj.SaveData(ref gameData);
         }
-        // TODO: save data to file
-
         dataHandler.Save(gameData, selectedProfileId);
+        Debug.Log("File successfully written to: " + Application.persistentDataPath + "/" + selectedProfileId);
     }
 
     private void OnApplicationQuit()

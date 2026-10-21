@@ -11,8 +11,10 @@ public class SaveSlotsMenu : MonoBehaviour
 
     private void Awake()
     {
-        saveSlots = this.GetComponentsInChildren<SaveSlot>();
+        saveSlots = this.GetComponentsInChildren<SaveSlot>(true);
+        Debug.Log("SaveSlotsMenu found " + saveSlots.Length + " save slot cards in the hierarchy.");
     }
+
 
     public void OnReturnClicked()
     {
@@ -20,7 +22,7 @@ public class SaveSlotsMenu : MonoBehaviour
         {
             onReturnPressed.Invoke();
         }
-        this.DeactiveMenu();
+        this.DeactivateMenu();
     }
 
     public void ActivateMenu()
@@ -29,17 +31,28 @@ public class SaveSlotsMenu : MonoBehaviour
 
         // Loads all profiles that exist cleanly from disk
         Dictionary<string, GameData> profilesGameData = DataPersistenceManager.Instance.GetAllProfilesGameData();
-
-        // Loop each slot then set content
-        foreach (SaveSlot saveSlot in saveSlots)
+        if (profilesGameData == null || profilesGameData.Count == 0 )
         {
-            GameData profileData = null;
-            profilesGameData.TryGetValue(saveSlot.GetProfileId(), out profileData);
-            saveSlot.SetData(profileData);
+            Debug.Log("data check: 0");
         }
+        else
+        {
+            foreach (string diskid in profilesGameData.Keys)
+            {
+                Debug.Log("found save file");
+            }
+                
+        }
+            // Loop each slot then set content
+            foreach (SaveSlot saveSlot in saveSlots)
+            {
+                GameData profileData = null;
+                profilesGameData.TryGetValue(saveSlot.GetProfileId(), out profileData);
+                saveSlot.SetData(profileData);
+            }
     }
 
-    public void DeactiveMenu()
+    public void DeactivateMenu()
     {
         this.gameObject.SetActive(false);
     }
