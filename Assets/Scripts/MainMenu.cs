@@ -6,6 +6,11 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
+    [Header("Menu Navigation")]
+    [SerializeField] private SaveSlotsMenu saveSlotsMenu;
+    [SerializeField] private GameObject mainMenuPanel;
+
+    [Header("Scene Names")]
     [SerializeField] private string gameSceneName = "GameScene";
     [SerializeField] private string settingSceneName = "";
 
@@ -26,10 +31,31 @@ public class MainMenu : MonoBehaviour
         }
     }
 
+    public void ActivateMenu()
+    {
+        mainMenuPanel.SetActive(true);
+    }
+
+    public void DeactivateMenu()
+    {
+        mainMenuPanel.SetActive(false);
+    }
+
     public void PlayGame()
     {
         StartCoroutine(PlaySoundAndLoadScene(gameSceneName));
     }
+    public void LoadGame()
+    {
+        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        saveSlotsMenu.ActivateMenu();
+        this.DeactivateMenu();
+    }
+
+    public void OnClickReturn()
+     {
+     StartCoroutine(PlaySoundAndLoadScene(gameSceneName));
+     }
 
     public void SettingMenu()
     {
@@ -87,5 +113,6 @@ public class MainMenu : MonoBehaviour
         UpdateMusicVolume(savedMusic);
         UpdateSoundVolume(savedSFX);
     }
+
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class QuizGameManager : MonoBehaviour
+public class QuizGameManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private UIManager uiManager;
     #region Variables
@@ -16,7 +16,9 @@ public class QuizGameManager : MonoBehaviour
     private List<int> FinishedQuestions = new List<int>();
 
     private int currentQuestion = 0;
-
+    //data
+    private bool isGameCompleted = false;
+    private int customHighScore = 0;
     private bool IsFinished
     {
         get
@@ -25,6 +27,18 @@ public class QuizGameManager : MonoBehaviour
         }
     }
     #endregion
+    //for data
+    public void LoadData(GameData data)
+    {
+        this.isGameCompleted = data.quizGameCompleted;
+        this.customHighScore = data.quizHighScore;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.quizGameCompleted = this.isGameCompleted;
+        data.quizHighScore = this.customHighScore;
+    }
 
     #region Unity Methods
     void OnEnable()
@@ -41,8 +55,8 @@ public class QuizGameManager : MonoBehaviour
     }
     void Start()
     {
-        events.StartupHighscore = PlayerPrefs.GetInt(GameUtility.SavePrefKey);
-
+        //events.StartupHighscore = PlayerPrefs.GetInt(GameUtility.SavePrefKey);
+        events.StartupHighscore = this.customHighScore;
         LoadQuestions();
 
         var seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
@@ -185,6 +199,13 @@ public class QuizGameManager : MonoBehaviour
         if (IsFinished)
         {
             SetHighscore();
+            isGameCompleted = true;
+
+            if (DataPersistenceManager.Instance != null)
+            {
+                DataPersistenceManager.Instance.SaveGame();
+                Debug.Log("Quiz complete and saviong..");
+            }
 
             if (events.DisplayResolutionScreenUI != null)
             {

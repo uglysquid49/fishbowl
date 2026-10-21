@@ -8,15 +8,19 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject settingMenu;
 
-    [Header("Action Map Control")]
+    [SerializeField] private SaveSlotsMenu saveSlotsMenu;
+
+    [Header("Map Control")]
     [SerializeField] private PlayerInput playerInput;
 
     [Header("Input References")]
     [SerializeField] private InputActionReference pauseActionReference;
 
     [Header("Scene Changes")]
-    [SerializeField] private string settingSceneName = "";
     [SerializeField] private string quitSceneName = "";
+
+    [Header("Save Feedback UI")]
+    [SerializeField] private GameObject saveConfirmationText;
 
     private bool isPauesd = false;
     private bool isPaused;
@@ -99,7 +103,17 @@ public class PauseMenu : MonoBehaviour
 
     public void saveButton()
     {
-        DataPersistenceManager.Instance.SaveGame();
+        if (DataPersistenceManager.Instance != null)
+        {
+            SoundManager.instance.PlaySound3D("Interaction", transform.position);
+            DataPersistenceManager.Instance.SaveGame();
+
+            Debug.Log("Game Saved!");
+        }
+        else
+        {
+            Debug.LogError("DataPersistenceManager Instance not found in scene!");
+        }
     }
 
     public void MainMenu()
@@ -107,5 +121,6 @@ public class PauseMenu : MonoBehaviour
         SoundManager.instance.PlaySound3D("Interaction", transform.position);
         SceneManager.LoadScene(quitSceneName);
     }
+
 
 }
