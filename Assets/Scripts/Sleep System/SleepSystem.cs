@@ -6,59 +6,95 @@ using System.Collections;
 public class SleepSystem : MonoBehaviour
 {
     [Header("Interaction")]
-    public bool Caninteract = true;
+    [SerializeField] private InputActionReference interactAction;
     [SerializeField] private GameObject BlackPanel;
+
+    [Header("Main Scene Triggers")]
+    [SerializeField] private GameObject[] QuestTriggers;
+
+    [Header("Day")]
+    [SerializeField] private int CurrentDay = 1;
+    [SerializeField] private int DaysToAdvance = 1;
+    [SerializeField] private float WriteSpeed = 0.25f;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI Subtext;
-    private string Holder;
-    private float WriteSpeed = 0.25f;
-    
-    void Update()
+
+    private bool Caninteract = true;
+
+    private void Start()
     {
-        
-
-        if (Caninteract == true)
+        // The black panel and text should be hidden when the game starts.
+        if (BlackPanel != null)
         {
-            Ray ray = new Ray(transform.position, transform.forward);
-            RaycastHit hit;
+            BlackPanel.SetActive(false);
+        }
 
-            if (Physics.Raycast(ray, out hit, 5f))
+        if (Subtext != null)
+        {
+            Subtext.text = "";
+        }
+    }
+
+    private void Update()
+    {
+        if (!Caninteract || interactAction == null || !interactAction.action.WasPressedThisFrame())
+        {
+            return;
+        }
+
+        Ray ray = new Ray(transform.position, transform.forward);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, 5f))
+        {
+            if (hit.collider.CompareTag("Bed"))
             {
-                if (hit.collider.CompareTag("Bed"))
-                {
-                    if (Input.GetKey("Interact"))
-                    {
-                        // sleep
-                        StartCoroutine(SleepCO());
-                    }
-                }
+                // sleep
+                StartCoroutine(SleepCO());
             }
         }
     }
 
     IEnumerator SleepCO()
     {
+        // Turn on the black panel while the next day is being shown.
         BlackPanel.SetActive(true);
         Caninteract = false;
 
         yield return new WaitForSeconds(1f);
 
-        // write night
-
+        // Write the next day on the screen one letter at a time.
         Subtext.text = "";
-        Holder = "Night 12";
-        foreach(char c in Holder)
+        CurrentDay++;
+        // Advance the day by the amount set in the Inspector.
+        CurrentDay += DaysToAdvance;
+        string Holder = "Day " + CurrentDay;
+
+        foreach (char c in Holder)
         {
             Subtext.text += c;
             yield return new WaitForSeconds(WriteSpeed);
         }
 
-        // write night
-
+        // Wait before bringing the room back.
         yield return new WaitForSeconds(1f);
 
-        // loading "next scene"
-        Debug.Log("loaded the next scene");
+        // Turn the main scene's quest triggers back on for the new day.
+        if (QuestTriggers != null)
+        {
+            foreach (GameObject trigger in QuestTriggers)
+            {
+                if (trigger != null)
+                {
+                    trigger.SetActive(true);
+                }
+            }
+        }
+
+        // Clear the day text and turn off the black panel.
+        Subtext.text = "";
+        BlackPanel.SetActive(false);
+        Caninteract = true;
     }
 }

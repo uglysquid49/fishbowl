@@ -2255,7 +2255,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260463278}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 9f2cca8fbc62e794488a52d571d14970, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 85ca75107e71a2d44a3b8756a7338b67, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}
@@ -2266,7 +2266,7 @@ VideoPlayer:
   m_RenderMode: 3
   m_AspectRatio: 2
   m_DataSource: 0
-  m_TimeUpdateMode: 2
+  m_TimeUpdateMode: 1
   m_PlaybackSpeed: 1
   m_AudioOutputMode: 2
   m_TargetAudioSources:
@@ -18590,6 +18590,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SleepSystem
   Caninteract: 1
   BlackPanel: {fileID: 1753389779}
+  interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  BlackPanel: {fileID: 1753389779}
+  QuestTriggers:
+  - {fileID: 2118184937}
+  - {fileID: 1148702844}
+  - {fileID: 1424223232}
+  CurrentDay: 1
+  DaysToAdvance: 4
+  WriteSpeed: 0.25
   Subtext: {fileID: 1414269035}
 --- !u!1 &1900991308 stripped
 GameObject:
