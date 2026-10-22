@@ -12,7 +12,7 @@ public class SleepSystem : MonoBehaviour
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI Subtext;
     private string Holder;
-    private float WriteSpeed = 0.05f;
+    private float WriteSpeed = 0.25f;
     
     void Update()
     {
@@ -30,6 +30,7 @@ public class SleepSystem : MonoBehaviour
                     if (Input.GetKey("Interact"))
                     {
                         // sleep
+                        StartCoroutine(SleepCO());
                     }
                 }
             }
@@ -41,11 +42,23 @@ public class SleepSystem : MonoBehaviour
         BlackPanel.SetActive(true);
         Caninteract = false;
 
+        yield return new WaitForSeconds(1f);
+
         // write night
 
         Subtext.text = "";
         Holder = "Night 12";
+        foreach(char c in Holder)
+        {
+            Subtext.text += c;
+            yield return new WaitForSeconds(WriteSpeed);
+        }
 
         // write night
+
+        yield return new WaitForSeconds(1f);
+
+        // loading "next scene"
+        Debug.Log("loaded the next scene");
     }
 }
