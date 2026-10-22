@@ -480,6 +480,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   saveSlotsMenu: {fileID: 0}
   mainMenuPanel: {fileID: 0}
+  controllerPanel: {fileID: 0}
+  objecthide: {fileID: 0}
   gameSceneName: MainMenu
   settingSceneName: 
   audioMixer: {fileID: 24100000, guid: a05e2a78a858df54fb8c6246fefe7817, type: 2}

@@ -9,6 +9,11 @@ public class MainMenu : MonoBehaviour
     [Header("Menu Navigation")]
     [SerializeField] private SaveSlotsMenu saveSlotsMenu;
     [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject controllerPanel;
+    [SerializeField] private GameObject keyboardPanel;
+
+    [Header("Hide 3D object")]
+    [SerializeField] private GameObject objecthide;
 
     [Header("Scene Names")]
     [SerializeField] private string gameSceneName = "GameScene";
@@ -50,6 +55,57 @@ public class MainMenu : MonoBehaviour
         SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
       //  saveSlotsMenu.ActivateMenu();
         this.DeactivateMenu();
+    }
+    public void OpenControllerMenu()
+    {
+        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        DeactivateMenu();              
+        controllerPanel.SetActive(true); 
+
+        if (objecthide != null && keyboardPanel != null)
+        {
+            objecthide.SetActive(false);
+            keyboardPanel.SetActive(false);
+
+        }
+    }
+
+    public void CloseControllerMenu()
+    {
+        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        controllerPanel.SetActive(false);
+        ActivateMenu();
+
+        if (objecthide != null)
+        {
+            objecthide.SetActive(true);
+
+        }
+    }
+
+    public void OpenKeyboardMenu()
+    {
+        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        DeactivateMenu();
+        keyboardPanel.SetActive(true);
+
+        if (objecthide != null && controllerPanel != null)
+        {
+            objecthide.SetActive(false);
+            controllerPanel.SetActive(false);
+        }
+    }
+
+    public void CloseKeyboardMenu()
+    {
+        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        keyboardPanel.SetActive(false);
+        ActivateMenu();
+
+        if (objecthide != null)
+        {
+            objecthide.SetActive(true);
+        }
     }
 
     public void OnClickReturn()
