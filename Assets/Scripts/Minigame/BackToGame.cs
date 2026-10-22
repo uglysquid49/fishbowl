@@ -9,6 +9,7 @@ public class BackToGame : MonoBehaviour
     {
         Scene scene = gameObject.scene;
         string sceneName = scene.name;
+        Time.timeScale = 1f;
 
         if (QuestManager.instance != null)
         {

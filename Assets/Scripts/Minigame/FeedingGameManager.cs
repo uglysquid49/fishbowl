@@ -42,19 +42,25 @@ public class FeedingGameManager : MonoBehaviour
 
     public void WinGame()
     {
+        if (isGameCompleted)
+        {
+            return;
+        }
         if (winPanel != null)
         {
             winPanel.SetActive(true);
         }
 
         isGameCompleted = true;
+
         PlayerPrefs.SetInt("FeedingGameCompleted", 1);
         PlayerPrefs.Save();
 
         // Closing mini-game scene
         //SceneManager.UnloadSceneAsync(gameObject.scene);
         // Turning off custom cursor after mini-game finished
-        Cursor.visible = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
 
         Time.timeScale = 0f;
     }
