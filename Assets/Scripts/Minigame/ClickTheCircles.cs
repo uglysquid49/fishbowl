@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class ClickTheCircles : MonoBehaviour
@@ -8,7 +9,10 @@ public class ClickTheCircles : MonoBehaviour
     [SerializeField] private QuestInfo questInfo;
 
     public GameObject minigameCanvas;
-    public RectTransform circle;
+
+    [Header("Circle Sprites")]
+    [SerializeField] private Image circleImage;
+    [SerializeField] private Sprite[] circleImageSprites;
     public RectTransform playArea;
 
     public int clicksNeeded = 5;
@@ -31,7 +35,7 @@ public class ClickTheCircles : MonoBehaviour
         Debug.Log("CLICKED!");
         clicks++;
 
-        circle.gameObject.SetActive(false);
+        circleImage.gameObject.SetActive(false);
 
 
         if (clicks >= clicksNeeded)
@@ -47,19 +51,28 @@ public class ClickTheCircles : MonoBehaviour
     {
         yield return new WaitForSeconds(spawnInterval);
         MoveCircle();
-        circle.gameObject.SetActive(true);
+        circleImage.gameObject.SetActive(true);
     }
 
     void MoveCircle()
     {
+        RectTransform circleRect = circleImage.rectTransform;
+
         float halfWidth = playArea.rect.width / 2f;
         float halfHeight = playArea.rect.height / 2f;
-        float circleRadius = circle.rect.width / 2f;
+        float circleRadius = circleRect.rect.width / 2f;
 
         float x = Random.Range(-halfWidth + circleRadius, halfWidth - circleRadius);
         float y = Random.Range(-halfHeight + circleRadius, halfHeight - circleRadius);
 
-        circle.anchoredPosition = new Vector2(x, y);
+        circleRect.anchoredPosition = new Vector2(x, y);
+
+        // Choose a random sprite for this circle.
+        if (circleImageSprites != null && circleImageSprites.Length > 0)
+        {
+            int randomIndex = Random.Range(0, circleImageSprites.Length);
+            circleImage.sprite = circleImageSprites[randomIndex];
+        }
     }
 
     void EndMinigame()
