@@ -58,7 +58,7 @@ public class InteractionSystem : MonoBehaviour
     private void OnEnable()
     {
         if (actionReference != null && actionReference.action != null)
-            {
+        {
             actionReference.action.Enable();
         }
     }
@@ -104,7 +104,7 @@ public class InteractionSystem : MonoBehaviour
                     if (!string.IsNullOrEmpty(soundName) && SoundManager.instance != null)
                     {
                         SoundManager.instance.PlaySound2D(soundName);
-                    print("sound on");
+                        print("sound on");
                     }
 
                     NewDialogue(currentDialogue[currentIndex].speakerName, currentDialogue[currentIndex].dialogueText);
@@ -214,4 +214,3 @@ public class InteractionSystem : MonoBehaviour
         }
     }
 }
-

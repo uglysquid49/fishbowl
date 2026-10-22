@@ -17,94 +17,124 @@ public class PauseMenu : MonoBehaviour
     [Header("Scene Changes")]
     [SerializeField] private string quitSceneName = "";
 
-    private bool isPauesd = false;
-    private bool isPaused;
+
+    private bool isPaused = false;
+    private bool pausePressedThisFrame = false; // Flag to execute cleanly inside Update
 
     private void OnEnable()
     {
-        pauseActionReference.action.Enable();
-        pauseActionReference.action.performed += OnPauseTriggered;
+        if (pauseActionReference != null && pauseActionReference.action != null)
+        {
+            pauseActionReference.action.Enable();
+            pauseActionReference.action.performed += OnPauseTriggered;
+        }
     }
 
     private void OnDisable()
     {
-        pauseActionReference.action.performed -= OnPauseTriggered;
-        pauseActionReference.action.Disable();
+        if (pauseActionReference != null && pauseActionReference.action != null)
+        {
+            pauseActionReference.action.performed -= OnPauseTriggered;
+            pauseActionReference.action.Disable();
+        }
     }
 
     private void OnPauseTriggered(InputAction.CallbackContext context)
     {
-        if (isPaused)
+        pausePressedThisFrame = true;
+    }
+
+    private void Update()
+    {
+        if (pausePressedThisFrame)
         {
-            ResumeGame();
-            Debug.Log("game has resumed");
-        }
-        else
-        {
-            PauseGame();
-            Debug.Log("game has paused");
+            pausePressedThisFrame = false;
+
+            if (isPaused)
+            {
+                ResumeGame();
+                Debug.Log("game has resumed");
+            }
+            else
+            {
+                PauseGame();
+                Debug.Log("game has paused");
+            }
         }
     }
 
     public void ResumeGame()
     {
-        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        }
+
         pauseMenu.SetActive(false);
         settingMenu.SetActive(false);
 
         Time.timeScale = 1;
-
         isPaused = false;
+
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
         if (playerInput != null)
         {
-            playerInput.actions.Enable();
+            playerInput.SwitchCurrentActionMap("Player");
         }
     }
 
     public void PauseGame()
     {
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        }
 
-        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
         pauseMenu.SetActive(true);
         settingMenu.SetActive(false);
 
         Time.timeScale = 0;
-
         isPaused = true;
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
         if (playerInput != null)
         {
-            playerInput.actions.Disable();
-            pauseActionReference.action.Enable();
+            playerInput.SwitchCurrentActionMap("UI");
         }
     }
 
     public void OpenSettings()
     {
-        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        }
         pauseMenu.SetActive(false);
-        settingMenu.SetActive(true); //opens setting panel
+        settingMenu.SetActive(true);
         Debug.Log("settingsOpen");
     }
 
     public void CloseSettings()
     {
-        SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
-        settingMenu.SetActive(false); 
-        pauseMenu.SetActive(true);  
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlaySound3D("MainMenuButon", transform.position);
+        }
+        settingMenu.SetActive(false);
+        pauseMenu.SetActive(true);
     }
 
     public void MainMenu()
     {
         Time.timeScale = 1f;
-        SoundManager.instance.PlaySound3D("MainMenuButton", transform.position);
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlaySound3D("MainMenuButton", transform.position);
+        }
         SceneManager.LoadScene(quitSceneName);
     }
-
-
 }

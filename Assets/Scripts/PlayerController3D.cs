@@ -21,6 +21,7 @@ public class PlayerController3D : MonoBehaviour, IDataPersistence
     static public bool dialogue = false;
 
     private InputAction moveInput;
+    private InputAction lookAction;
 
     private float currentMoveSpeed = 0.0f;
     private Vector3 moveDirection = Vector3.zero;
@@ -47,6 +48,8 @@ public class PlayerController3D : MonoBehaviour, IDataPersistence
 
         moveInput = InputSystem.actions.FindAction("Move");
         // jumpInput = InputSystem.actions.FindAction("Jump");
+        moveInput = InputSystem.actions.FindAction("Move");
+        lookAction = InputSystem.actions.FindAction("Look");
 
         // Making a variable so the cursor isn't shown on screen
         Cursor.lockState = CursorLockMode.Locked;
@@ -71,12 +74,20 @@ public class PlayerController3D : MonoBehaviour, IDataPersistence
 
     private void Update()
     {
-        Vector2 moveVector = moveInput.ReadValue<Vector2>();
-        Vector2 mouseDelta = Mouse.current.delta.ReadValue();
+        if (freezePlayer) return;
 
+        Vector2 moveVector = moveInput.ReadValue<Vector2>();
+
+        Vector2 lookVector = lookAction != null ? lookAction.ReadValue<Vector2>() : Vector2.zero;
+
+        if (Gamepad.current != null && lookAction.activeControl?.device is Gamepad)
+        {
+            // Boost sensitivity for controller since its max value is 1, unlike mouse raw pixels
+            lookVector *= 100f * Time.deltaTime;
+        }
         // Passing the movement vector as a parameter
         HandleMovement(moveVector); // Keeping the code clean and don't need to store every input as its own seperate field
-        HandleLooking(mouseDelta);
+        HandleLooking(lookVector);
     }
 
     // Creating a method to handle the overall movement
