@@ -137,8 +137,7 @@ public class QuestCanvasUI : MonoBehaviour
         while (elapsedTime < fadeDuration)
         {
             elapsedTime += Time.deltaTime;
-            questObjectiveGuideCanvasGroup.alpha =
-                Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
+            questObjectiveGuideCanvasGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
 
             yield return null;
         }

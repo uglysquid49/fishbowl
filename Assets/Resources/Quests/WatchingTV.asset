@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WatchingTV
   m_EditorClassIdentifier: Assembly-CSharp::QuestInfo
   <id>k__BackingField: a027448b-327b-428d-b11a-56eb9071fe7b
-  <questName>k__BackingField: WatchingTV
+  <questName>k__BackingField: Watch TV
   prefabTargetID: 
   isRequired: 1

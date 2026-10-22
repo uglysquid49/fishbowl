@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: QuizBowl
   m_EditorClassIdentifier: Assembly-CSharp::QuestInfo
   <id>k__BackingField: 1e8e63c5-6461-429a-938c-e37149e36484
-  <questName>k__BackingField: QuizBowl
+  <questName>k__BackingField: Read books
   prefabTargetID: QuizBowl
   isRequired: 1

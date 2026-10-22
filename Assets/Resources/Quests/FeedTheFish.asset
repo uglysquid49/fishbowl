@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FeedTheFish
   m_EditorClassIdentifier: Assembly-CSharp::QuestInfo
   <id>k__BackingField: 90f1ae1a-b455-4aec-9bf5-ceceebc2c7e1
-  <questName>k__BackingField: FeedingFishy
+  <questName>k__BackingField: Feed the Fishy
   prefabTargetID: FeedingFishy
   isRequired: 0

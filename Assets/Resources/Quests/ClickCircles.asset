@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ClickCircles
   m_EditorClassIdentifier: Assembly-CSharp::QuestInfo
   <id>k__BackingField: 89329e4b-dfaa-44b1-8aad-5261c9ea7d28
-  <questName>k__BackingField: Make breakfast
+  <questName>k__BackingField: Eat breakfast
   prefabTargetID: ClickCircles
   isRequired: 1
