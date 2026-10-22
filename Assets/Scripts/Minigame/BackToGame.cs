@@ -13,6 +13,8 @@ public class BackToGame : MonoBehaviour
         }
 
         Scene scene = gameObject.scene;
+        // Turning off cursor after mini-game end
+        Cursor.visible = false;
         if (scene.isLoaded)
         {
             SceneManager.UnloadSceneAsync(scene);
