@@ -19,7 +19,7 @@ public class PauseMenu : MonoBehaviour
 
 
     private bool isPaused = false;
-    private bool pausePressedThisFrame = false; // Flag to execute cleanly inside Update
+    private bool pausePressedThisFrame = false; 
 
     private void OnEnable()
     {
