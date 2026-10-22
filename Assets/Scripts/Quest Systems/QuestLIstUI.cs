@@ -142,10 +142,18 @@ public class QuestListUI : MonoBehaviour
                     ? "Available"
                     : quest.state.ToString();
 
-            questListText.text += quest.info.questName + " - " + questStatus + "\n";
+            //optinal text
+            if (quest.info.questName == "FeedingFishy")
+            {
+                questListText.text += quest.info.questName + " (Optional) - " + questStatus + "\n";
+            }
+            else
+            {
+                questListText.text += quest.info.questName + " - " + questStatus + "\n";
+            }
         }
         UpdateQuestListVisibility();
-    }
+        }
 
     private void UpdateQuestListVisibility()
     {
