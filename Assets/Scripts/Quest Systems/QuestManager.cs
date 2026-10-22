@@ -1,7 +1,8 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Globalization;
+using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : MonoBehaviour
 {
@@ -85,9 +86,24 @@ public class QuestManager : MonoBehaviour
                 dayNightManager.AdvanceTime();
             }
 
-            if (!string.IsNullOrEmpty(quest.GetPrefabTargetID()) && SceneMiniGameRegistry.instance != null)
+            string targetID = quest.GetPrefabTargetID();
+
+            if (!string.IsNullOrEmpty(targetID))
             {
-                SceneMiniGameRegistry.instance.ToggleMiniGameHierarchy(quest.GetPrefabTargetID(), false);
+                if (SceneMiniGameRegistry.instance != null)
+                {
+                    SceneMiniGameRegistry.instance.ToggleMiniGameHierarchy(targetID, false);
+                }
+                else
+                {
+                    // Fall back to unloading the minigame scene directly.
+                    Scene minigameScene = SceneManager.GetSceneByName(targetID);
+
+                    if (minigameScene.isLoaded)
+                    {
+                        SceneManager.UnloadSceneAsync(minigameScene);
+                    }
+                }
             }
 
             // SaveQuestSystemState();
