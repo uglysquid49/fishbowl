@@ -1,4 +1,3 @@
-
 using System.Collections;
 using UnityEngine;
 
@@ -7,13 +6,14 @@ public class FoodSpawner : MonoBehaviour
     public static FoodSpawner Instance;
 
     public GameObject foodPrefab;
+    [SerializeField] private RectTransform spawnCanvas;
+
     public int startingFoodCount = 5;
     public float spawnDelay = 1f;
 
     [Header("Spawn Settings")]
-    public float topSpawnY = 5f;
-    public float leftSpawnX = -8f;
-    public float rightSpawnX = 8f;
+    public float topSpawnOffset = 50f;
+    public float horizontalPadding = 50f;
 
     private void Awake()
     {
@@ -36,12 +36,27 @@ public class FoodSpawner : MonoBehaviour
 
     public void SpawnFood()
     {
-        if (foodPrefab == null) return;
+        if (foodPrefab == null || spawnCanvas == null)
+        {
+            Debug.LogWarning("Assign the Food Prefab and Spawn Canvas in the Inspector.");
+            return;
+        }
 
-        float x = Random.Range(leftSpawnX, rightSpawnX);
+        Rect canvasRect = spawnCanvas.rect;
 
-        Vector3 spawnPosition = new Vector3(x, topSpawnY, 0f);
+        float x = Random.Range(
+            canvasRect.xMin + horizontalPadding,
+            canvasRect.xMax - horizontalPadding
+        );
 
-        Instantiate(foodPrefab,spawnPosition,Quaternion.identity);
+        Vector3 localSpawnPosition = new Vector3(
+            x,
+            canvasRect.yMax + topSpawnOffset,
+            0f
+        );
+
+        Vector3 spawnPosition = spawnCanvas.TransformPoint(localSpawnPosition);
+
+        Instantiate(foodPrefab, spawnPosition, Quaternion.identity);
     }
 }
