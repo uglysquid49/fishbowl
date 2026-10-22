@@ -19,6 +19,7 @@ public class FeedingGameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        //SceneManager.UnloadSceneAsync("DayScene3D");
     }
 
     void Start()
