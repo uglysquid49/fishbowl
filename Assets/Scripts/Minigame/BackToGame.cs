@@ -7,29 +7,23 @@ public class BackToGame : MonoBehaviour
 
     public void ReturnToMainGame()
     {
+        Time.timeScale = 1f;
+
         Scene scene = gameObject.scene;
         string sceneName = scene.name;
-        Time.timeScale = 1f;
 
         if (QuestManager.instance != null)
         {
-            // Use the assigned quest if there is one.
-            if (questInfo != null)
-            {
-                QuestManager.instance.CompleteAndCloseQuest(questInfo.id);
-                return;
-            }
-
-            // Otherwise, find the in-progress quest for this minigame scene.
             foreach (Quest quest in QuestManager.instance.AllQuests)
             {
                 if (quest.state == QuestState.IN_PROGRESS && quest.GetPrefabTargetID() == sceneName)
                 {
+                    Cursor.visible = false;
                     QuestManager.instance.CompleteAndCloseQuest(quest.info.id);
                     return;
                 }
             }
-        } 
+        }
 
         // Keep the Back button usable if the quest could not be found.
         if (scene.isLoaded)
