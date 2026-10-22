@@ -52,7 +52,7 @@ public class FeedingGameManager : MonoBehaviour
         PlayerPrefs.Save();
 
         // Closing mini-game scene
-        SceneManager.UnloadSceneAsync(gameObject.scene);
+        //SceneManager.UnloadSceneAsync(gameObject.scene);
         // Turning off custom cursor after mini-game finished
         Cursor.visible = false;
 
