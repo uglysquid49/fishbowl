@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 419708211}
   - component: {fileID: 419708210}
   - component: {fileID: 419708209}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &419708211
 Canvas:
   m_ObjectHideFlags: 0
@@ -289,7 +289,7 @@ Canvas:
   m_GameObject: {fileID: 419708208}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 1
   m_Camera: {fileID: 1027459588}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -311,8 +311,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419708208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.10691672, y: 0.10691672, z: 0.10691672}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1356908891}
@@ -323,8 +323,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1920.0001, y: 1080}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &466463498
 GameObject:
   m_ObjectHideFlags: 0
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 466463502}
   - component: {fileID: 466463501}
   - component: {fileID: 466463500}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 662559250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -728,6 +728,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fish_FINAL
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 940d3d49a8d46fb46b7e9c6e9084b866, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -756,7 +760,7 @@ GameObject:
   - component: {fileID: 907119677}
   - component: {fileID: 907119679}
   - component: {fileID: 907119678}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: WinPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -911,7 +915,7 @@ Camera:
   m_GameObject: {fileID: 1027459586}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -936,7 +940,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -1023,7 +1027,7 @@ GameObject:
   - component: {fileID: 1356908891}
   - component: {fileID: 1356908893}
   - component: {fileID: 1356908892}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1038,7 +1042,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1356908890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1233,7 +1237,7 @@ GameObject:
   - component: {fileID: 1598799816}
   - component: {fileID: 1598799818}
   - component: {fileID: 1598799817}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1370,7 +1374,7 @@ GameObject:
   - component: {fileID: 1749154290}
   - component: {fileID: 1749154292}
   - component: {fileID: 1749154291}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: WinnerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1568,7 +1572,7 @@ GameObject:
   - component: {fileID: 1958110090}
   - component: {fileID: 1958110092}
   - component: {fileID: 1958110091}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1583,7 +1587,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958110089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 4.00045}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
