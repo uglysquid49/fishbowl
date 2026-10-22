@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DayNightManager : MonoBehaviour
@@ -30,36 +31,65 @@ public class DayNightManager : MonoBehaviour
         }
 
         currentTimeIndex++;
-
         UpdateTimeVisuals();
 
         Debug.Log("Time advanced to stage: " + currentTimeIndex);
     }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnMinigameSceneChanged;
+        SceneManager.sceneUnloaded += OnMinigameSceneChanged;
+        UpdateClockVisibility();
+    }
 
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnMinigameSceneChanged;
+        SceneManager.sceneUnloaded -= OnMinigameSceneChanged;
+    }
+
+    private void OnMinigameSceneChanged(Scene scene, LoadSceneMode mode)
+    {
+        UpdateClockVisibility();
+    }
+
+    private void OnMinigameSceneChanged(Scene scene)
+    {
+        UpdateClockVisibility();
+    }
+
+    private void UpdateClockVisibility()
+    {
+        if (clockImage == null)
+        {
+            return;
+        }
+
+        bool minigameIsLoaded =
+            SceneManager.GetSceneByName("ClickCircles").isLoaded ||
+            SceneManager.GetSceneByName("FeedingFishy").isLoaded ||
+            SceneManager.GetSceneByName("QuizBowl").isLoaded;
+
+        clockImage.enabled = !minigameIsLoaded;
+    }
     private void UpdateTimeVisuals()
     {
         // Update the clock image.
-        if (clockImage != null &&
-            timeImages != null &&
-            currentTimeIndex < timeImages.Length)
+        if (clockImage != null && timeImages != null && currentTimeIndex < timeImages.Length)
         {
             clockImage.sprite = timeImages[currentTimeIndex];
         }
 
         // Update the sun's brightness.
-        if (sunLight != null &&
-            sunIntensities != null &&
-            currentTimeIndex < sunIntensities.Length)
+        if (sunLight != null && sunIntensities != null && currentTimeIndex < sunIntensities.Length)
         {
             sunLight.intensity = sunIntensities[currentTimeIndex];
         }
 
         // Update the scene's ambient lighting.
-        if (ambientColors != null &&
-            currentTimeIndex < ambientColors.Length)
+        if (ambientColors != null && currentTimeIndex < ambientColors.Length)
         {
-            RenderSettings.ambientLight =
-                ambientColors[currentTimeIndex];
+            RenderSettings.ambientLight = ambientColors[currentTimeIndex];
         }
     }
 }
