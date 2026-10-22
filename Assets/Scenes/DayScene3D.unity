@@ -3088,7 +3088,6 @@ GameObject:
   - component: {fileID: 302091780}
   - component: {fileID: 302091783}
   - component: {fileID: 302091782}
-  - component: {fileID: 302091781}
   m_Layer: 5
   m_Name: Black Panel
   m_TagString: Untagged
@@ -3115,28 +3114,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &302091781
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 302091779}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f8750c699f99ebe4596468cceda58b67, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &302091782
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3157,7 +3134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20150,8 +20127,8 @@ Transform:
   m_GameObject: {fileID: 1868245977}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.6859, y: 0.11673, z: 1.0662}
-  m_LocalScale: {x: 3.652226, y: 0.17341143, z: 0.8251008}
+  m_LocalPosition: {x: -3.857, y: 0.12142, z: 0.80846}
+  m_LocalScale: {x: 4.8143644, y: 0.22859095, z: 1.0876478}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 969103737}
@@ -20193,6 +20170,7 @@ MonoBehaviour:
   interactionIndicator: {fileID: 69781902}
   playerTag: Player
   tvOnObject: {fileID: 260463278}
+  tvVideoPlayer: {fileID: 260463281}
   watchingTVQuest: {fileID: 11400000, guid: 2c308e992a55ba74ba498a58f6ec167a, type: 2}
 --- !u!114 &1873944735 stripped
 MonoBehaviour:
@@ -20316,6 +20294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   WalkSpeed: 3
+  Gravity: -20
   LookSensitivity: 0.2
   LookAngleLimit: 90
   freezePlayer: 0
@@ -20490,6 +20469,7 @@ MonoBehaviour:
   - {fileID: 1148702844}
   - {fileID: 1424223232}
   - {fileID: 1868245977}
+  tvInteraction: {fileID: 1868245981}
   CurrentDay: 1
   DaysToAdvance: 5
   WriteSpeed: 0.25

@@ -15,3 +15,4 @@ MonoBehaviour:
   <id>k__BackingField: 89329e4b-dfaa-44b1-8aad-5261c9ea7d28
   <questName>k__BackingField: Make breakfast
   prefabTargetID: ClickCircles
+  isRequired: 1

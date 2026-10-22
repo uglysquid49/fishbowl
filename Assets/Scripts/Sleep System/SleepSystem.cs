@@ -11,6 +11,7 @@ public class SleepSystem : MonoBehaviour
 
     [Header("Main Scene Triggers")]
     [SerializeField] private GameObject[] QuestTriggers;
+    [SerializeField] private InteractionQuest tvInteraction;
 
     [Header("Day")]
     [SerializeField] private int CurrentDay = 1;
@@ -134,6 +135,10 @@ public class SleepSystem : MonoBehaviour
         if (QuestManager.instance != null)
         {
             QuestManager.instance.ResetQuestsForNewDay();
+        }
+        if (tvInteraction != null)
+        {
+            tvInteraction.ResetForNewDay();
         }
         // Turn the main scene's quest triggers back on for the new day.
         if (QuestTriggers != null)

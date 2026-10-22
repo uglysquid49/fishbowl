@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Video;
 
 public class InteractionQuest : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class InteractionQuest : MonoBehaviour
 
     [Header("TV")]
     [SerializeField] private GameObject tvOnObject;
+    [SerializeField] private VideoPlayer tvVideoPlayer;
 
     [Header("Quest")]
     [SerializeField] private QuestInfo watchingTVQuest;
@@ -42,21 +44,28 @@ public class InteractionQuest : MonoBehaviour
 
         if (interactAction.action.WasPressedThisFrame())
         {
-            // Turn on the TV.
+            // Turn on the TV object.
             if (tvOnObject != null)
             {
                 tvOnObject.SetActive(true);
             }
+            else
+            {
+                Debug.LogWarning("Assign the TV screen object to TV On Object.");
+            }
 
-            // Start the quest if it hasn't been started yet, then complete it.
+            // Start playing the TV video.
+            if (tvVideoPlayer != null)
+            {
+                tvVideoPlayer.gameObject.SetActive(true);
+                tvVideoPlayer.Play();
+            }
+
+            // Complete the Watching TV quest.
             if (watchingTVQuest != null && QuestManager.instance != null)
             {
                 QuestManager.instance.StartQuest(watchingTVQuest.id);
                 QuestManager.instance.CompleteAndCloseQuest(watchingTVQuest.id);
-            }
-            else
-            {
-                Debug.LogWarning("Watching TV QuestInfo or QuestManager is missing.");
             }
 
             used = true;
@@ -68,13 +77,23 @@ public class InteractionQuest : MonoBehaviour
         }
     }
 
+    public void ResetForNewDay()
+    {
+        used = false;
+
+        if (interactionIndicator != null)
+        {
+            interactionIndicator.SetActive(playerInRange);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(playerTag))
         {
             playerInRange = true;
 
-            if (interactionIndicator != null)
+            if (!used && interactionIndicator != null)
             {
                 interactionIndicator.SetActive(true);
             }

@@ -15,22 +15,33 @@ public class QuestPoint3D : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(playerTag))
+        if (!other.CompareTag(playerTag))
         {
-            if (questInfoAsset != null && QuestManager.instance != null)
-            {
-                QuestManager.instance.StartQuest(questInfoAsset.id);
-                playerController3D.FreezePlayer();
-
-                Debug.Log($"3D Trigger fired for quest asset: {questInfoAsset.questName}");
-                SceneManager.LoadScene(miniGameName, LoadSceneMode.Additive);
-                //Camera.main.gameObject.SetActive(false); // Disabling the 3d camera
-                SceneManager.UnloadSceneAsync("DayScene3D");
-                gameObject.SetActive(false);
-            }
+            return;
         }
 
-        Debug.Log($"Something touched the trigger zone: {other.gameObject.name}");
+        if (questInfoAsset == null || QuestManager.instance == null)
+        {
+            Debug.LogWarning("QuestInfo or QuestManager is missing.");
+            return;
+        }
 
+        QuestManager.instance.StartQuest(questInfoAsset.id);
+        Debug.Log($"3D Trigger fired for quest asset: {questInfoAsset.questName}");
+
+        // if no minigame, let the player move around and leave the trigger active.
+        if (string.IsNullOrWhiteSpace(miniGameName))
+        {
+            return;
+        }
+
+        // if theres minigame, freeze the player and open the minigame additively.
+        if (playerController3D != null)
+        {
+            playerController3D.FreezePlayer();
+        }
+
+        SceneManager.LoadScene(miniGameName, LoadSceneMode.Additive);
+        gameObject.SetActive(false);
     }
 }
