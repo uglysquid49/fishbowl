@@ -25,6 +25,7 @@ public class QuestPoint3D : MonoBehaviour
                 Debug.Log($"3D Trigger fired for quest asset: {questInfoAsset.questName}");
                 SceneManager.LoadScene(miniGameName, LoadSceneMode.Additive);
                 Camera.main.gameObject.SetActive(false); // Disabling the 3d camera
+                SceneManager.UnloadSceneAsync("DayScene3D");
                 gameObject.SetActive(false);
             }
         }
