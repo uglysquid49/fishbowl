@@ -17,6 +17,7 @@ public class SleepSystem : MonoBehaviour
     [SerializeField] private int DaysToAdvance = 1;
     [SerializeField] private float WriteSpeed = 0.25f;
     [SerializeField] private DayNightManager dayNightManager;
+    public int GameplayDay { get; private set; } = 1;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI Subtext;
@@ -114,6 +115,8 @@ public class SleepSystem : MonoBehaviour
         Subtext.text = "";
         // Advance the day by the amount set in the Inspector.
         CurrentDay += DaysToAdvance;
+        GameplayDay++;
+
         string Holder = "Day " + CurrentDay;
 
         foreach (char c in Holder)

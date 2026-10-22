@@ -20148,6 +20148,7 @@ MonoBehaviour:
   - {fileID: 2118184937}
   - {fileID: 1148702844}
   - {fileID: 1424223232}
+  - {fileID: 1868245977}
   CurrentDay: 1
   DaysToAdvance: 5
   WriteSpeed: 0.25

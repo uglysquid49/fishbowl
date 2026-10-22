@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,11 @@ public class QuestManager : MonoBehaviour
 
     [Header("Day and Night System")]
     [SerializeField] private DayNightManager dayNightManager;
+    [SerializeField] private SleepSystem sleepSystem;
+    [SerializeField] private GameObject endingPanel;
+
+    private bool endingStarted;
+    [SerializeField] private TMP_Text endingText;
 
     public static QuestManager instance { get; private set; }
 
@@ -109,6 +115,7 @@ public class QuestManager : MonoBehaviour
             // SaveQuestSystemState();
             Debug.Log($"Quest {id} marked finished. Mini-game hidden successfully.");
         }
+        CheckForEnding();
     }
     public void ResetQuestsForNewDay()
     {
@@ -163,7 +170,39 @@ public class QuestManager : MonoBehaviour
             SceneMiniGameRegistry.instance.ToggleMiniGameHierarchy(prefabID, true);
         }
     }
+    private void CheckForEnding()
+    {
+        if (endingStarted || sleepSystem == null || sleepSystem.GameplayDay != 2)
+        {
+            return;
+        }
+
+        foreach (Quest quest in questMap.Values)
+        {
+            if (quest.info.isRequired && quest.state != QuestState.FINISHED)
+            {
+                return;
+            }
+        }
+
+        endingStarted = true;
+
+        if (endingText != null)
+        {
+            endingText.text = "Thanks for playing our demo!";
+        }
+
+        if (endingPanel != null)
+        {
+            endingPanel.SetActive(true);
+            Time.timeScale = 0f;
+        }
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+    }
 }
+
 
 [System.Serializable]
 public struct QuestDataSave
