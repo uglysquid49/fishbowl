@@ -101,6 +101,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
+        Time.timeScale = 1f;
         SoundManager.instance.PlaySound3D("MainMenuButton", transform.position);
         SceneManager.LoadScene(quitSceneName);
     }

@@ -21,7 +21,6 @@ public class PlayerController3D : MonoBehaviour, IDataPersistence
     static public bool dialogue = false;
 
     private InputAction moveInput;
-    // private InputAction jumpInput;
 
     private float currentMoveSpeed = 0.0f;
     private Vector3 moveDirection = Vector3.zero;

@@ -29,6 +29,7 @@ public class InteractionSystem : MonoBehaviour
     public float typingSpeed = 0.05f;
 
     [Header("Dialogue Status")]
+    public bool DialogueCompleted { get; private set; }
     public bool isTyping = false;
     public bool dialogueFinished = true;
 
@@ -94,7 +95,8 @@ public class InteractionSystem : MonoBehaviour
                     {
                         Debug.Log("soundmanger is missing");
                     }
-                        canva.SetActive(true);
+                    DialogueCompleted = false;
+                    canva.SetActive(true);
                     dialogueUI.SetActive(true);
 
                     //sfx for interaction
@@ -173,6 +175,7 @@ public class InteractionSystem : MonoBehaviour
 
         currentIndex = 0;
         dialogueFinished = true;
+        DialogueCompleted = true;
         isTyping = false;
 
         if (player_detection && interactionIndicator != null)

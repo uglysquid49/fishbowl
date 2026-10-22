@@ -40,8 +40,18 @@ public class FirstPersonGrabber : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, grabDistance, grabLayer))
         {
             Debug.Log($"Raycast HIT something! Object Name: {hit.collider.gameObject.name}");
-            
-            if (hit.collider.TryGetComponent(out Rigidbody rb))
+
+            InteractionSystem dialogue = hit.collider.GetComponentInParent<InteractionSystem>();
+
+            if (dialogue != null && !dialogue.DialogueCompleted)
+            {
+                Debug.Log("Raycast has hit nothing");
+                return;
+            }
+
+            Rigidbody rb = hit.collider.GetComponentInParent<Rigidbody>();
+
+            if (rb != null)
             {
                 grabbedObject = rb;
                 grabbedObject.useGravity = false;
