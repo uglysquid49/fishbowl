@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerController3D : MonoBehaviour, IDataPersistence
 {
     [SerializeField] private float WalkSpeed = 5.5f;
+    [SerializeField] private float Gravity = -20f;
 
-    // [SerializeField] private float JumpForce = 5f;
-    //[SerializeField] private float Gravity = 20.0f;
+    private float verticalVelocity;
 
     [SerializeField] private float LookSensitivity = 0.2f;
     [SerializeField] private float LookAngleLimit = 90.0f;
@@ -83,18 +83,21 @@ public class PlayerController3D : MonoBehaviour, IDataPersistence
     // Creating a method to handle the overall movement
     private void HandleMovement(Vector2 moveVector)
     {
+        if (characterController.isGrounded && verticalVelocity < 0f)
+        {
+            verticalVelocity = -2f;
+        }
+
+        verticalVelocity += Gravity * Time.deltaTime;
+
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
-        // Saving the current vertical movement - Preserving it
-        float oldY = moveDirection.y;
+        Vector3 horizontalMovement =
+            forward * (moveVector.y * currentMoveSpeed) + right * (moveVector.x * currentMoveSpeed);
 
-        // By swapping the y movement here it helps match up to real world movement
-        Vector2 newSpeed = new Vector2(moveVector.y * currentMoveSpeed, moveVector.x * currentMoveSpeed);
-
-        // Building out the move direction
-        moveDirection = (forward * newSpeed.x) + (right * newSpeed.y);
-        moveDirection.y = oldY;
+        moveDirection = horizontalMovement;
+        moveDirection.y = verticalVelocity;
 
         characterController.Move(moveDirection * Time.deltaTime);
     }
