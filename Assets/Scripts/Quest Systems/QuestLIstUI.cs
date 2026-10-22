@@ -30,13 +30,19 @@ public class QuestListUI : MonoBehaviour
                 SceneManager.GetSceneByName("FeedingFishy").isLoaded ||
                 SceneManager.GetSceneByName("QuizBowl").isLoaded;
 
-            if (minigameIsLoaded)
+            if (IsMinigameLoaded() || IsMinigameQuestInProgress())
+            {
+                questListPanel.SetActive(false);
                 return;
+            }
 
             bool showQuestList = !questListPanel.activeSelf;
 
             if (showQuestList)
+            {
                 RefreshQuestList();
+            }
+
 
             questListPanel.SetActive(showQuestList);
         }
@@ -82,6 +88,37 @@ public class QuestListUI : MonoBehaviour
         UpdateQuestListVisibility();
     }
 
+    private bool IsMinigameLoaded()
+    {
+        return SceneManager.GetSceneByName("ClickCircles").isLoaded ||
+               SceneManager.GetSceneByName("FeedingFishy").isLoaded ||
+               SceneManager.GetSceneByName("QuizBowl").isLoaded;
+    }
+
+    private bool IsMinigameQuestInProgress()
+    {
+        if (QuestManager.instance == null)
+        {
+            return false;
+        }
+
+        foreach (Quest quest in QuestManager.instance.AllQuests)
+        {
+            string targetID = quest.GetPrefabTargetID();
+
+            bool isMinigame =
+                targetID == "ClickCircles" ||
+                targetID == "FeedingFishy" ||
+                targetID == "QuizBowl";
+
+            if (isMinigame && quest.state == QuestState.IN_PROGRESS)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     private void Start()
     {
         if (questListPanel != null)
@@ -107,6 +144,7 @@ public class QuestListUI : MonoBehaviour
 
             questListText.text += quest.info.questName + " - " + questStatus + "\n";
         }
+        UpdateQuestListVisibility();
     }
 
     private void UpdateQuestListVisibility()
@@ -119,7 +157,9 @@ public class QuestListUI : MonoBehaviour
             SceneManager.GetSceneByName("FeedingFishy").isLoaded ||
             SceneManager.GetSceneByName("QuizBowl").isLoaded;
 
-        if (minigameIsLoaded)
+        if (IsMinigameLoaded() || IsMinigameQuestInProgress())
+        {
             questListPanel.SetActive(false);
+        }
     }
 }

@@ -48,16 +48,44 @@ public class QuestCanvasUI : MonoBehaviour
 
     private void OnSceneUnloaded(Scene scene)
     {
-        if (IsMinigameScene(scene.name))
+        if (!IsMinigameScene(scene.name))
         {
-            if (objectiveGuideCoroutine != null)
-                StopCoroutine(objectiveGuideCoroutine);
-
-            objectiveGuideCoroutine = StartCoroutine(ShowCompletionThenNextQuest());
+            UpdateObjectiveGuide();
             return;
         }
 
-        UpdateObjectiveGuide();
+        Quest completedQuest = FindQuestForScene(scene.name);
+
+        if (completedQuest != null && completedQuest.state == QuestState.FINISHED)
+        {
+            if (objectiveGuideCoroutine != null)
+            {
+                StopCoroutine(objectiveGuideCoroutine);
+            }
+
+            objectiveGuideCoroutine = StartCoroutine(ShowCompletionThenNextQuest(completedQuest.info.questName));
+        }
+        else
+        {
+            UpdateObjectiveGuide();
+        }
+    }
+    private Quest FindQuestForScene(string sceneName)
+    {
+        if (QuestManager.instance == null)
+        {
+            return null;
+        }
+
+        foreach (Quest quest in QuestManager.instance.AllQuests)
+        {
+            if (quest.GetPrefabTargetID() == sceneName)
+            {
+                return quest;
+            }
+        }
+
+        return null;
     }
 
     private void Start()
@@ -72,12 +100,17 @@ public class QuestCanvasUI : MonoBehaviour
                sceneName == "QuizBowl";
     }
 
-    private IEnumerator ShowCompletionThenNextQuest()
+    private IEnumerator ShowCompletionThenNextQuest(string completedQuestName)
     {
+
         if (questObjectiveGuidePanel == null || statusText == null)
             yield break;
 
         questObjectiveGuidePanel.SetActive(true);
+        if (titleText != null)
+        {
+            titleText.text = completedQuestName;
+        }
         statusText.text = "Complete!";
 
         if (questObjectiveGuideCanvasGroup != null)
@@ -118,7 +151,23 @@ public class QuestCanvasUI : MonoBehaviour
                SceneManager.GetSceneByName("FeedingFishy").isLoaded ||
                SceneManager.GetSceneByName("QuizBowl").isLoaded;
     }
+    private bool IsMinigameQuestInProgress()
+    {
+        if (QuestManager.instance == null)
+        {
+            return false;
+        }
 
+        foreach (Quest quest in QuestManager.instance.AllQuests)
+        {
+            if (quest.state == QuestState.IN_PROGRESS && IsMinigameScene(quest.GetPrefabTargetID()))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     private void UpdateQuestUI(Quest quest)
     {
         UpdateObjectiveGuide();
@@ -131,7 +180,7 @@ public class QuestCanvasUI : MonoBehaviour
             return;
         }
 
-        if (IsMinigameLoaded() || QuestManager.instance == null)
+        if (IsMinigameLoaded() || IsMinigameQuestInProgress() || QuestManager.instance == null)
         {
             questObjectiveGuidePanel.SetActive(false);
             return;
