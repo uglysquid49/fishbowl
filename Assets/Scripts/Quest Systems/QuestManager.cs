@@ -110,6 +110,21 @@ public class QuestManager : MonoBehaviour
             Debug.Log($"Quest {id} marked finished. Mini-game hidden successfully.");
         }
     }
+    public void ResetQuestsForNewDay()
+    {
+        foreach (Quest quest in questMap.Values)
+        {
+            quest.ChangeState(QuestState.CAN_START);
+            quest.SetStepIndex(0);
+
+            if (GameEventsManager.instance != null)
+            {
+                GameEventsManager.instance.questEvents.QuestStateChanged(quest);
+            }
+        }
+
+        Debug.Log("Quests reset for the new day.");
+    }
 
     private Quest GetQuestById(string id)
     {

@@ -92,4 +92,11 @@ public class DayNightManager : MonoBehaviour
             RenderSettings.ambientLight = ambientColors[currentTimeIndex];
         }
     }
+    public void ResetToFirstTimeStage()
+    {
+        currentTimeIndex = 0;
+        UpdateTimeVisuals();
+
+        Debug.Log("Time reset to the first stage.");
+    }
 }

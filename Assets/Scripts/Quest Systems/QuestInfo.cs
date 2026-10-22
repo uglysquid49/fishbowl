@@ -10,6 +10,8 @@ public class QuestInfo : ScriptableObject
     [Header("hierarchy mini-game configuration")]
     [Tooltip("unique indentifier of mini-game prefabs")]
     [SerializeField] private string prefabTargetID;
+    public bool isRequired = true;
+
     public string PrefabTargetID => prefabTargetID;
 
     private void OnValidate()

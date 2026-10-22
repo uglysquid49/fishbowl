@@ -2471,7 +2471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &260463279
 SpriteRenderer:
   serializedVersion: 2
@@ -2539,13 +2539,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260463278}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0.432, y: 1.964, z: 3.05}
   m_LocalScale: {x: 2.4230995, y: 1.3844833, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!328 &260463281
 VideoPlayer:
   m_ObjectHideFlags: 0
@@ -9025,6 +9025,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
   saveSlotsMenu: {fileID: 0}
   mainMenuPanel: {fileID: 0}
+  controllerPanel: {fileID: 0}
+  keyboardPanel: {fileID: 0}
+  objecthide: {fileID: 0}
   gameSceneName: MainMenu
   settingSceneName: 
   audioMixer: {fileID: 24100000, guid: a05e2a78a858df54fb8c6246fefe7817, type: 2}
@@ -9665,6 +9668,7 @@ Transform:
   - {fileID: 2118184938}
   - {fileID: 1148702845}
   - {fileID: 1424223233}
+  - {fileID: 1868245978}
   m_Father: {fileID: 1292962575}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &975742637
@@ -11066,7 +11070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 96fcd84e069896b4dac7036c8428f383, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.184
+      value: 9.398
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 96fcd84e069896b4dac7036c8428f383, type: 3}
       propertyPath: m_LocalPosition.y
@@ -18337,6 +18341,7 @@ MonoBehaviour:
   - {fileID: -954552637, guid: ece25539007eb2d4d95f5f4f8659318d, type: 3}
   - {fileID: -79822093, guid: ece25539007eb2d4d95f5f4f8659318d, type: 3}
   - {fileID: -971383504, guid: ece25539007eb2d4d95f5f4f8659318d, type: 3}
+  - {fileID: -265969391, guid: ece25539007eb2d4d95f5f4f8659318d, type: 3}
   sunLight: {fileID: 410087040}
   sunIntensities:
   - 1.2
@@ -19777,6 +19782,77 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864283451}
   m_CullTransparentMesh: 1
+--- !u!1 &1868245977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1868245978}
+  - component: {fileID: 1868245979}
+  - component: {fileID: 1868245981}
+  m_Layer: 0
+  m_Name: WatchTv
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1868245978
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868245977}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.6859, y: 0.11673, z: 1.0662}
+  m_LocalScale: {x: 3.652226, y: 0.17341143, z: 0.8251008}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 969103737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1868245979
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868245977}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.21810882, y: 1.124135, z: 0.9909173}
+  m_Center: {x: 0.2829433, y: -0.08508062, z: 0.078224905}
+--- !u!114 &1868245981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868245977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5cbf083530e8c409049e2bc1a4699c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InteractionQuest
+  interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactionIndicator: {fileID: 69781902}
+  playerTag: Player
+  tvOnObject: {fileID: 260463278}
+  watchingTVQuest: {fileID: 11400000, guid: 2c308e992a55ba74ba498a58f6ec167a, type: 2}
 --- !u!114 &1873944735 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4683712951627332365, guid: 73c67a32af6eaf9479f7afa9e8580372, type: 3}
@@ -20073,9 +20149,15 @@ MonoBehaviour:
   - {fileID: 1148702844}
   - {fileID: 1424223232}
   CurrentDay: 1
-  DaysToAdvance: 4
+  DaysToAdvance: 5
   WriteSpeed: 0.25
+  dayNightManager: {fileID: 1732155034}
   Subtext: {fileID: 1414269035}
+  uiToHideWhileSleeping:
+  - {fileID: 882125008}
+  - {fileID: 92611750}
+  - {fileID: 1325221404}
+  tvOnObject: {fileID: 260463278}
 --- !u!1 &1900991308 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: d628120d7e36b4841a218fa26f96c05f, type: 3}

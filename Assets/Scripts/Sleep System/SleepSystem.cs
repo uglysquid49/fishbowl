@@ -16,10 +16,16 @@ public class SleepSystem : MonoBehaviour
     [SerializeField] private int CurrentDay = 1;
     [SerializeField] private int DaysToAdvance = 1;
     [SerializeField] private float WriteSpeed = 0.25f;
+    [SerializeField] private DayNightManager dayNightManager;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI Subtext;
+    [SerializeField] private GameObject[] uiToHideWhileSleeping;
 
+    [Header("Objects to turn off when sleeping")]
+    [SerializeField] private GameObject tvOnObject;
+
+    private bool[] uiWasActive;
     private bool Caninteract = true;
 
     private void Start()
@@ -50,14 +56,54 @@ public class SleepSystem : MonoBehaviour
         {
             if (hit.collider.CompareTag("Bed"))
             {
+                if (!AreAllTasksComplete())
+                {
+                    Debug.Log("Finish your tasks before going to sleep!");
+                    return;
+                }
                 // sleep
                 StartCoroutine(SleepCO());
             }
         }
     }
 
+    private void HideSleepUI()
+    {
+        uiWasActive = new bool[uiToHideWhileSleeping.Length];
+
+        for (int i = 0; i < uiToHideWhileSleeping.Length; i++)
+        {
+            GameObject uiObject = uiToHideWhileSleeping[i];
+
+            if (uiObject != null)
+            {
+                uiWasActive[i] = uiObject.activeSelf;
+                uiObject.SetActive(false);
+            }
+        }
+    }
+
+    private void RestoreSleepUI()
+    {
+        if (uiWasActive == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < uiToHideWhileSleeping.Length; i++)
+        {
+            GameObject uiObject = uiToHideWhileSleeping[i];
+
+            if (uiObject != null)
+            {
+                uiObject.SetActive(uiWasActive[i]);
+            }
+        }
+    }
+
     IEnumerator SleepCO()
     {
+        HideSleepUI();
         // Turn on the black panel while the next day is being shown.
         BlackPanel.SetActive(true);
         Caninteract = false;
@@ -66,7 +112,6 @@ public class SleepSystem : MonoBehaviour
 
         // Write the next day on the screen one letter at a time.
         Subtext.text = "";
-        CurrentDay++;
         // Advance the day by the amount set in the Inspector.
         CurrentDay += DaysToAdvance;
         string Holder = "Day " + CurrentDay;
@@ -76,10 +121,17 @@ public class SleepSystem : MonoBehaviour
             Subtext.text += c;
             yield return new WaitForSeconds(WriteSpeed);
         }
-
+        if (dayNightManager != null)
+        {
+            dayNightManager.ResetToFirstTimeStage();
+        }
         // Wait before bringing the room back.
         yield return new WaitForSeconds(1f);
-
+        //This resets the quests back to being available after sleeping.
+        if (QuestManager.instance != null)
+        {
+            QuestManager.instance.ResetQuestsForNewDay();
+        }
         // Turn the main scene's quest triggers back on for the new day.
         if (QuestTriggers != null)
         {
@@ -91,10 +143,31 @@ public class SleepSystem : MonoBehaviour
                 }
             }
         }
-
+        if (tvOnObject != null)
+        {
+            tvOnObject.SetActive(false);
+        }
         // Clear the day text and turn off the black panel.
         Subtext.text = "";
         BlackPanel.SetActive(false);
+        RestoreSleepUI();
         Caninteract = true;
+    }
+    private bool AreAllTasksComplete()
+    {
+        if (QuestManager.instance == null)
+        {
+            return false;
+        }
+
+        foreach (Quest quest in QuestManager.instance.AllQuests)
+        {
+            if (quest.info.isRequired && quest.state != QuestState.FINISHED)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
