@@ -35,5 +35,8 @@ public class BackToGame : MonoBehaviour
         {
             SceneManager.UnloadSceneAsync(scene);
         }
+
+        // Turn off cursor
+        Cursor.visible = false;
     }
 }
